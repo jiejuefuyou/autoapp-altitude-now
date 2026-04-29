@@ -75,6 +75,7 @@ final class IAPManager {
                 entitled = true
             }
         }
-        await MainActor.run { self.isPremium = entitled }
+        let finalEntitled = entitled
+        await MainActor.run { self.isPremium = finalEntitled }
     }
 }
