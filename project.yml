@@ -29,6 +29,7 @@ targets:
           - "Resources/StoreKitConfiguration.storekit"
     resources:
       - path: AltitudeNow/Resources/Assets.xcassets
+      - path: AltitudeNow/Resources/PrivacyInfo.xcprivacy
       - path: AltitudeNow/Resources/StoreKitConfiguration.storekit
         buildPhase: none
     settings:
