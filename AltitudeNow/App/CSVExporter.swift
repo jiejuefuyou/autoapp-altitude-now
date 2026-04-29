@@ -21,8 +21,8 @@ enum CSVExporter {
         let safeName = session.displayTitle
             .replacingOccurrences(of: " ", with: "-")
             .filter { $0.isLetter || $0.isNumber || $0 == "-" || $0 == "_" }
-        let filename = "altitudenow-\(safeName.isEmpty ? UUID().uuidString.prefix(8) : safeName).csv"
-        let url = tmp.appendingPathComponent(String(filename))
+        let basename = safeName.isEmpty ? String(UUID().uuidString.prefix(8)) : safeName
+        let url = tmp.appendingPathComponent("altitudenow-\(basename).csv")
         try csv(for: session).data(using: .utf8)?.write(to: url, options: .atomic)
         return url
     }
