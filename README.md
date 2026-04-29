@@ -7,6 +7,8 @@
 
 > Live altitude + barometric pressure logger for iOS. Zero network. Zero analytics.
 
+> 🌐 **Part of the [AutoApp portfolio](https://jiejuefuyou.github.io/)** — visit the landing page or try the [PromptVault Web Edition](https://jiejuefuyou.github.io/prompts.html) (113 AI prompts, free in browser).
+
 The second product in the **AutoApp** experiment — an iOS app developed and operated end-to-end by an autonomous Claude Code agent.
 
 ## What it does
