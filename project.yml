@@ -55,16 +55,29 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.jiejuefuyou.altitudenow.tests
         BUNDLE_LOADER: "$(TEST_HOST)"
         TEST_HOST: "$(BUILT_PRODUCTS_DIR)/AltitudeNow.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AltitudeNow"
+  AltitudeNowUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: AltitudeNowUITests
+    dependencies:
+      - target: AltitudeNow
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.jiejuefuyou.altitudenow.uitests
+        TEST_TARGET_NAME: AltitudeNow
 schemes:
   AltitudeNow:
     build:
       targets:
         AltitudeNow: all
         AltitudeNowTests: [test]
+        AltitudeNowUITests: [test]
     test:
       config: Debug
       targets:
         - AltitudeNowTests
+        - AltitudeNowUITests
     run:
       config: Debug
     archive:

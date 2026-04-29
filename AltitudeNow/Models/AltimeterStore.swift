@@ -4,7 +4,15 @@ import Observation
 
 @Observable
 final class AltimeterStore {
-    static let isSensorAvailable: Bool = CMAltimeter.isRelativeAltitudeAvailable()
+    /// Whether a barometric pressure sensor is reachable. Real devices: depends on hardware
+    /// (iPhone 6+ all have one). Simulator: always false. In `-FASTLANE_SNAPSHOT` mode
+    /// (UI tests / store screenshots) we override this to `true` so the screenshot path
+    /// renders the readouts and chart instead of the "no sensor" content view.
+    static var isSensorAvailable: Bool {
+        if ProcessInfo.processInfo.arguments.contains("-FASTLANE_SNAPSHOT") { return true }
+        return CMAltimeter.isRelativeAltitudeAvailable()
+    }
+
     static let sessionsCap = 200
 
     // Live state
@@ -22,6 +30,40 @@ final class AltimeterStore {
 
     init() {
         load()
+        if ProcessInfo.processInfo.arguments.contains("-FASTLANE_SNAPSHOT") {
+            injectSnapshotData()
+        }
+    }
+
+    private func injectSnapshotData() {
+        // Build a 60-minute mock session with smooth altitude/pressure curves so the
+        // chart card has shape. Used only for App Store screenshots; never reached in prod.
+        let now = Date()
+        var session = Session(name: "Mountain hike", startedAt: now.addingTimeInterval(-3600), readings: [])
+        for i in 0..<60 {
+            let t = now.addingTimeInterval(TimeInterval(-3600 + i * 60))
+            let alt = sin(Double(i) * 0.12) * 25 + Double(i) * 0.6
+            let pr = 101.0 - Double(i) * 0.018
+            let r = AltitudeReading(timestamp: t, relativeAltitude: alt, pressure: pr)
+            session.readings.append(r)
+            session.update(with: r)
+        }
+        liveSession = session
+        current = session.readings.last
+        isRunning = true
+
+        // Add a finished prior session so the SessionList screenshot has content.
+        var prior = Session(name: "Trail run", startedAt: now.addingTimeInterval(-86_400 - 1800), readings: [])
+        for i in 0..<30 {
+            let t = prior.startedAt.addingTimeInterval(TimeInterval(i * 60))
+            let alt = cos(Double(i) * 0.2) * 18 + Double(i) * 0.4
+            let pr = 100.5 - Double(i) * 0.02
+            let r = AltitudeReading(timestamp: t, relativeAltitude: alt, pressure: pr)
+            prior.readings.append(r)
+            prior.update(with: r)
+        }
+        prior.endedAt = prior.startedAt.addingTimeInterval(1800)
+        sessions = [prior]
     }
 
     deinit {
