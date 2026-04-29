@@ -24,7 +24,8 @@ platform :ios do
       scheme:        SCHEME,
       devices:       [TEST_DEVICE],
       clean:         true,
-      code_coverage: true
+      code_coverage: true,
+      only_testing:  ["#{SCHEME}Tests"]
     )
   end
 
