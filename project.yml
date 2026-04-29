@@ -1,0 +1,70 @@
+name: AltitudeNow
+options:
+  bundleIdPrefix: com.jiejuefuyou
+  deploymentTarget:
+    iOS: "17.0"
+  developmentLanguage: en
+  createIntermediateGroups: true
+  generateEmptyDirectories: true
+configs:
+  Debug: debug
+  Release: release
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Manual
+    ENABLE_USER_SCRIPT_SANDBOXING: "YES"
+    GENERATE_INFOPLIST_FILE: "YES"
+    INFOPLIST_KEY_NSHumanReadableCopyright: "Copyright © 2026 jiejuefuyou. All rights reserved."
+targets:
+  AltitudeNow:
+    type: application
+    platform: iOS
+    sources:
+      - path: AltitudeNow
+        excludes:
+          - "Resources/StoreKitConfiguration.storekit"
+    resources:
+      - path: AltitudeNow/Resources/Assets.xcassets
+      - path: AltitudeNow/Resources/StoreKitConfiguration.storekit
+        buildPhase: none
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.jiejuefuyou.altitudenow
+        PRODUCT_NAME: AltitudeNow
+        INFOPLIST_KEY_CFBundleDisplayName: AltitudeNow
+        INFOPLIST_KEY_NSMotionUsageDescription: "AltitudeNow reads the device's barometric pressure sensor to compute relative altitude. No motion data leaves your device."
+        INFOPLIST_KEY_UILaunchScreen_Generation: "YES"
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: "YES"
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait"
+        TARGETED_DEVICE_FAMILY: "1,2"
+        SUPPORTS_MACCATALYST: "NO"
+  AltitudeNowTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: AltitudeNowTests
+    dependencies:
+      - target: AltitudeNow
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.jiejuefuyou.altitudenow.tests
+        BUNDLE_LOADER: "$(TEST_HOST)"
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/AltitudeNow.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AltitudeNow"
+schemes:
+  AltitudeNow:
+    build:
+      targets:
+        AltitudeNow: all
+        AltitudeNowTests: [test]
+    test:
+      config: Debug
+      targets:
+        - AltitudeNowTests
+    run:
+      config: Debug
+    archive:
+      config: Release
