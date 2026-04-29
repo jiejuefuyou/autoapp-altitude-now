@@ -53,6 +53,26 @@ The barometric sensor is **not** simulated by the iOS Simulator — to actually 
 - `testflight.yml`: tag `v*` or manual dispatch → fastlane beta lane → TestFlight
 - `init_signing.yml`: one-time, manual — bootstraps signing certs into `autoapp-certs` (no Mac required)
 
+## AutoApp Portfolio
+
+Sister apps under the same rules: offline-first, one-time IAP, zero analytics SDKs:
+
+- [AutoChoice](https://github.com/jiejuefuyou/autoapp-hello) — friction-free decision wheel
+- [AltitudeNow](https://github.com/jiejuefuyou/autoapp-altitude-now) — barometric altimeter, no GPS
+- [DaysUntil](https://github.com/jiejuefuyou/autoapp-days-until) — quiet countdown, no notifications
+- [PromptVault](https://github.com/jiejuefuyou/autoapp-prompt-vault) — offline AI prompt manager
+
+All four scaffolded, polished, and shipped end-to-end by **one Claude Code agent** working from a shared orchestration layer (memory + ADR + state.yml + cross-repo verifier). Open-source extraction of that toolkit is on the roadmap.
+
+## Verify the privacy claim
+
+```sh
+nm -gU <App>.app/<App> | grep -iE 'URL|HTTP|Network'
+# (no output — no networking symbols in any binary)
+```
+
+The Privacy Manifest declares zero data collection. The binary's symbol table backs it up.
+
 ## Status
 
 Phase 0 — scaffold complete, awaiting App Store Connect API key for first signed build.
