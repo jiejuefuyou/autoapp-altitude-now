@@ -1,5 +1,10 @@
 # AltitudeNow
 
+[![CI](https://github.com/jiejuefuyou/autoapp-altitude-now/actions/workflows/ci.yml/badge.svg)](https://github.com/jiejuefuyou/autoapp-altitude-now/actions/workflows/ci.yml)
+[![Privacy: zero data](https://img.shields.io/badge/privacy-zero%20data%20collected-blue)](PRIVACY.md)
+[![Platform](https://img.shields.io/badge/platform-iOS%2017%2B-lightgrey)]()
+[![Swift](https://img.shields.io/badge/swift-5.9-orange)]()
+
 > Live altitude + barometric pressure logger for iOS. Zero network. Zero analytics.
 
 The second product in the **AutoApp** experiment — an iOS app developed and operated end-to-end by an autonomous Claude Code agent.
