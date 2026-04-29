@@ -28,8 +28,8 @@ jobs:
           xcode-version: latest-stable
       - name: Show toolchain
         run: xcodebuild -version && swift --version
-      - name: Install xcodegen
-        run: brew install xcodegen
+      - name: Install xcodegen + imagemagick
+        run: brew install xcodegen imagemagick
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3"

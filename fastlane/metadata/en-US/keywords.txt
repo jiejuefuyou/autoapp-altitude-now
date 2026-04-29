@@ -1,0 +1,1 @@
+altimeter,barometer,altitude,elevation,pressure,hiking,hpa,inhg,sensor,gps free,offline,fitness

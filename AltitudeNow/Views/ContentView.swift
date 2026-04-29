@@ -5,6 +5,8 @@ struct ContentView: View {
     @Environment(AltimeterStore.self) private var store
     @Environment(IAPManager.self) private var iap
 
+    @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding: Bool = false
+
     @State private var showSessions = false
     @State private var showSettings = false
     @State private var showPaywall = false
@@ -34,6 +36,12 @@ struct ContentView: View {
             .sheet(isPresented: $showSessions) { SessionListView() }
             .sheet(isPresented: $showSettings) { SettingsView() }
             .sheet(isPresented: $showPaywall) { PaywallView() }
+            .fullScreenCover(isPresented: Binding(
+                get: { !hasSeenOnboarding },
+                set: { _ in /* OnboardingView writes hasSeenOnboarding directly */ }
+            )) {
+                OnboardingView(hasSeenOnboarding: $hasSeenOnboarding)
+            }
         }
     }
 
@@ -90,22 +98,26 @@ struct ContentView: View {
         HStack(spacing: 12) {
             if !store.isRunning {
                 Button {
-                    if store.sessions.count >= 1, !iap.isPremium {
-                        // Free tier: only the most recent session is retained — non-premium users
-                        // can still record, but old sessions are auto-purged.
-                    }
+                    Haptics.medium()
                     store.start()
                 } label: {
                     Label("Start", systemImage: "play.fill").frame(maxWidth: .infinity).padding()
                 }
                 .buttonStyle(.borderedProminent)
             } else {
-                Button { store.stop() } label: {
+                Button {
+                    Haptics.medium()
+                    store.stop()
+                    Haptics.success()
+                } label: {
                     Label("Stop", systemImage: "stop.fill").frame(maxWidth: .infinity).padding()
                 }
                 .buttonStyle(.borderedProminent).tint(.red)
 
-                Button { store.reset() } label: {
+                Button {
+                    Haptics.light()
+                    store.reset()
+                } label: {
                     Label("Reset", systemImage: "arrow.counterclockwise")
                         .frame(maxWidth: .infinity).padding()
                 }

@@ -53,6 +53,13 @@ struct SessionListView: View {
                 Text(s.displayTitle).font(.headline)
                 Spacer()
                 Text(durationString(s.duration)).font(.caption.monospacedDigit()).foregroundStyle(.secondary)
+                if iap.isPremium, let csvURL = try? CSVExporter.writeTempCSV(for: s) {
+                    ShareLink(item: csvURL) {
+                        Image(systemName: "square.and.arrow.up").font(.caption)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("Export CSV")
+                }
             }
             HStack(spacing: 16) {
                 stat("max", store.altitudeUnit.formatted(s.maxAltitude))

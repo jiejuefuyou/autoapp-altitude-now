@@ -1,0 +1,7 @@
+First release.
+
+• Live altitude and barometric pressure readout
+• Real-time chart of altitude over the current session
+• Persistent session log with min/max/gain/avg-pressure stats
+• Custom calibration offset, CSV export (premium)
+• Completely offline. Zero data collection.

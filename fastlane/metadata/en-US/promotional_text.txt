@@ -1,0 +1,1 @@
+Live altitude and barometric pressure from your iPhone's sensor — no GPS, no network, no data collection.

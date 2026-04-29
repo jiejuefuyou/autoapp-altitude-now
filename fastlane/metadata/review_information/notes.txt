@@ -1,0 +1,7 @@
+AltitudeNow uses CMAltimeter (Core Motion) to read the iPhone's barometric pressure sensor. The motion-usage permission prompt is required by iOS. The app makes no network requests and stores all data on-device only.
+
+If reviewers test on a device without a barometer (e.g., the iOS Simulator or older iPad), the app shows a "No barometric sensor" content view — this is intentional, not a bug.
+
+The single in-app purchase (com.jiejuefuyou.altitudenow.premium, $2.99 one-time non-consumable) unlocks unlimited session history, custom calibration offset, CSV export, and unit toggles. Free tier still records and shows live data; only history retention and exports are gated.
+
+No demo account is needed — the app works the moment it launches.

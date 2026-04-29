@@ -40,3 +40,6 @@ fastlane/README.md
 # IDE
 .vscode/
 .idea/
+
+# Generated icon (re-created by scripts/generate_icons.sh on each CI run)
+AltitudeNow/Resources/Assets.xcassets/AppIcon.appiconset/icon.png

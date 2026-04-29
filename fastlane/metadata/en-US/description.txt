@@ -1,0 +1,34 @@
+A simple, honest altimeter for iPhone.
+
+AltitudeNow reads your iPhone's built-in barometric pressure sensor (every iPhone since the iPhone 6 has one) and shows you live altitude and pressure. Tap Start to begin recording a session — see your elevation gain and loss as a real-time chart, then save it for later.
+
+WHAT IT DOES
+• Live relative altitude — the distance up or down from where you started
+• Live atmospheric pressure (hPa or inHg)
+• Real-time line chart that grows as you move
+• Persistent session log with min, max, gain, and average pressure
+• Custom calibration offset to align with a known reference altitude (Premium)
+
+NO GPS. NO INTERNET. NO TRACKING.
+• AltitudeNow does not request your location and does not need GPS
+• Zero network traffic. Zero analytics. Zero advertising SDKs.
+• Sensor data and session history live only in the app's sandbox
+• Delete the app, delete the data — there is no cloud copy
+
+WHO IT'S FOR
+• Hikers checking elevation gain on a trail
+• Cyclists profiling a climb
+• Pilots and skydivers wanting a quick reference
+• Anyone curious about the air pressure at their location
+
+PREMIUM (one-time $2.99)
+• Unlimited session history (free tier keeps the most recent only)
+• Custom calibration offset
+• Imperial/metric and hPa/inHg unit toggle
+• CSV export of any session
+• Session detail charts
+
+No subscription. Pay once, keep it forever.
+
+REQUIREMENTS
+iOS 17 or later. The barometric sensor is part of the iPhone hardware (iPhone 6 and newer); it is not present in the iOS Simulator.
