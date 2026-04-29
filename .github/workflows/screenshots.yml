@@ -13,6 +13,9 @@ concurrency:
   group: screenshots
   cancel-in-progress: false
 
+permissions:
+  contents: write
+
 jobs:
   shots:
     name: Capture App Store screenshots
