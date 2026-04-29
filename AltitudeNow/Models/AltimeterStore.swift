@@ -91,6 +91,7 @@ final class AltimeterStore {
         guard isRunning else { return }
         altimeter.stopRelativeAltitudeUpdates()
         isRunning = false
+        var didSaveSession = false
         if var s = liveSession, !s.readings.isEmpty {
             s.endedAt = .now
             sessions.insert(s, at: 0)
@@ -98,9 +99,16 @@ final class AltimeterStore {
                 sessions = Array(sessions.prefix(Self.sessionsCap))
             }
             save()
+            didSaveSession = true
         }
         liveSession = nil
         current = nil
+        if didSaveSession {
+            Task { @MainActor in
+                ReviewService.recordSuccess()
+                ReviewService.maybeRequestReview()
+            }
+        }
     }
 
     func reset() {
