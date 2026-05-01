@@ -1,1 +1,1 @@
-AltitudePro 实时海拔
+AltitudeNowPro 实时海拔
