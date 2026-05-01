@@ -79,9 +79,4 @@ jobs:
           MATCH_FORCE:                    ${{ inputs.force }}
         run: |
           set -euxo pipefail
-          if [ "$MATCH_FORCE" = "true" ]; then FORCE_FLAG="--force"; else FORCE_FLAG=""; fi
-          bundle exec fastlane run match \
-            type:"$MATCH_TYPE" \
-            readonly:false \
-            app_identifier:"$APP_BUNDLE_ID" \
-            $FORCE_FLAG
+          bundle exec fastlane init_signing
