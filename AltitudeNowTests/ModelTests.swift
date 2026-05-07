@@ -10,6 +10,41 @@ final class ModelTests: XCTestCase {
         XCTAssertEqual(decoded, r)
     }
 
+    func testSessionDecodesOldSchemaWithoutDefaultedFields() throws {
+        // Backward-compat guard: a v1.0.0-era JSON with NO maxAltitude/minAltitude/
+        // avgPressure (added later as defaulted properties) must still decode and
+        // fall back to the property defaults. See Codable migration audit
+        // 2026-05-07 + dev.to article #72.
+        let json = #"""
+        {
+            "id":"00000000-0000-0000-0000-000000000001",
+            "startedAt":777600000,
+            "readings":[]
+        }
+        """#.data(using: .utf8)!
+        let decoded = try JSONDecoder().decode(Session.self, from: json)
+        XCTAssertNil(decoded.name)
+        XCTAssertEqual(decoded.readings.count, 0)
+        XCTAssertEqual(decoded.maxAltitude, 0, accuracy: 1e-9)
+        XCTAssertEqual(decoded.minAltitude, 0, accuracy: 1e-9)
+        XCTAssertEqual(decoded.avgPressure, 0, accuracy: 1e-9)
+    }
+
+    func testReadingDecodesWithoutOptionalIDField() throws {
+        // Backward-compat guard for AltitudeReading: a JSON without `id` should
+        // still decode (the property has a default UUID).
+        let json = #"""
+        {
+            "timestamp":777600000,
+            "relativeAltitude":42.0,
+            "pressure":101.3
+        }
+        """#.data(using: .utf8)!
+        let decoded = try JSONDecoder().decode(AltitudeReading.self, from: json)
+        XCTAssertEqual(decoded.relativeAltitude, 42.0, accuracy: 1e-9)
+        XCTAssertEqual(decoded.pressure, 101.3, accuracy: 1e-9)
+    }
+
     func testSessionUpdateMaintainsExtrema() {
         var s = Session(name: nil, startedAt: .now, readings: [])
 
