@@ -31,6 +31,9 @@ targets:
     resources:
       - path: AltitudeNow/Resources/Assets.xcassets
       - path: AltitudeNow/Resources/PrivacyInfo.xcprivacy
+      - path: AltitudeNow/Resources/JapanMountains.json
+      - path: AltitudeNow/Resources/en.lproj
+      - path: AltitudeNow/Resources/ja.lproj
       - path: AltitudeNow/Resources/StoreKitConfiguration.storekit
         buildPhase: none
     settings:

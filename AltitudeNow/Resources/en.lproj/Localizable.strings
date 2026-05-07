@@ -1,0 +1,10 @@
+/* Japan 100 Famous Mountains feature */
+"japan_mountains_title" = "100 Famous Japanese Mountains";
+"japan_mountains_nav_title" = "100名山";
+"japan_mountains_search_placeholder" = "Search mountains";
+"japan_mountains_region_label" = "Region";
+"japan_mountains_region_all" = "All Regions";
+"japan_mountains_choose_button" = "Choose 100名山";
+"japan_mountains_elevation_unit" = "m";
+"japan_mountains_prefilled_alert" = "Session name and reference altitude pre-filled.";
+"japan_mountains_load_error" = "Could not load mountain data.";

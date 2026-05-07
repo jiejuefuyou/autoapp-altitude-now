@@ -10,6 +10,8 @@ struct ContentView: View {
     @State private var showSessions = false
     @State private var showSettings = false
     @State private var showPaywall = false
+    @State private var showMountainList = false
+    @State private var pendingSessionName: String = ""
 
     var body: some View {
         NavigationStack {
@@ -36,6 +38,11 @@ struct ContentView: View {
             .sheet(isPresented: $showSessions) { SessionListView() }
             .sheet(isPresented: $showSettings) { SettingsView() }
             .sheet(isPresented: $showPaywall) { PaywallView() }
+            .sheet(isPresented: $showMountainList) {
+                MountainListView { name, _ in
+                    pendingSessionName = name
+                }
+            }
             .fullScreenCover(isPresented: Binding(
                 get: { !hasSeenOnboarding },
                 set: { _ in /* OnboardingView writes hasSeenOnboarding directly */ }
@@ -95,11 +102,33 @@ struct ContentView: View {
     }
 
     private var controls: some View {
-        HStack(spacing: 12) {
+        VStack(spacing: 10) {
+            if !store.isRunning {
+                // Session name field — pre-filled from 100名山 picker or typed manually
+                HStack(spacing: 8) {
+                    TextField("Session name (optional)", text: $pendingSessionName)
+                        .textFieldStyle(.roundedBorder)
+                    Button {
+                        showMountainList = true
+                    } label: {
+                        Label(
+                            String(localized: "japan_mountains_choose_button"),
+                            systemImage: "mountain.2"
+                        )
+                        .labelStyle(.iconOnly)
+                        .padding(8)
+                    }
+                    .buttonStyle(.bordered)
+                    .accessibilityLabel(String(localized: "japan_mountains_choose_button"))
+                }
+            }
+            HStack(spacing: 12) {
             if !store.isRunning {
                 Button {
                     Haptics.medium()
-                    store.start()
+                    let name = pendingSessionName.trimmingCharacters(in: .whitespaces)
+                    store.start(name: name.isEmpty ? nil : name)
+                    pendingSessionName = ""
                 } label: {
                     Label("Start", systemImage: "play.fill").frame(maxWidth: .infinity).padding()
                 }
@@ -123,7 +152,8 @@ struct ContentView: View {
                 }
                 .buttonStyle(.bordered)
             }
-        }
+            } // end HStack(spacing: 12)
+        } // end VStack
     }
 
     private var unsupportedDevice: some View {
