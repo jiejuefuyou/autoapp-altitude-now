@@ -58,6 +58,7 @@ targets:
         INFOPLIST_KEY_CFBundleLocalizations: "en ja zh-Hans zh-Hant ko es fr de"
         INFOPLIST_KEY_NSMotionUsageDescription: "AltitudeNow reads the device's barometric pressure sensor to compute relative altitude. No motion data leaves your device."
         INFOPLIST_KEY_NSHealthUpdateUsageDescription: "AltitudeNow can write your recorded altitude data to Apple Health as workout samples so you can track elevation gain alongside your other health data."
+        INFOPLIST_KEY_NSHealthShareUsageDescription: "AltitudeNow does not currently read your Health data, but the HealthKit framework requires this declaration when the app is configured to write workout samples. We will only request read access if a future update adds analytics features that depend on it."
         INFOPLIST_KEY_UILaunchScreen_Generation: "YES"
         INFOPLIST_KEY_UIApplicationSceneManifest_Generation: "YES"
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: "UIInterfaceOrientationPortrait"
