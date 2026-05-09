@@ -28,12 +28,26 @@ targets:
       - path: AltitudeNow
         excludes:
           - "Resources/StoreKitConfiguration.storekit"
+          - "Resources/en.lproj"
+          - "Resources/ja.lproj"
+          - "Resources/zh-Hans.lproj"
+          - "Resources/zh-Hant.lproj"
+          - "Resources/ko.lproj"
+          - "Resources/es.lproj"
+          - "Resources/fr.lproj"
+          - "Resources/de.lproj"
     resources:
       - path: AltitudeNow/Resources/Assets.xcassets
       - path: AltitudeNow/Resources/PrivacyInfo.xcprivacy
       - path: AltitudeNow/Resources/JapanMountains.json
       - path: AltitudeNow/Resources/en.lproj
       - path: AltitudeNow/Resources/ja.lproj
+      - path: AltitudeNow/Resources/zh-Hans.lproj
+      - path: AltitudeNow/Resources/zh-Hant.lproj
+      - path: AltitudeNow/Resources/ko.lproj
+      - path: AltitudeNow/Resources/es.lproj
+      - path: AltitudeNow/Resources/fr.lproj
+      - path: AltitudeNow/Resources/de.lproj
       - path: AltitudeNow/Resources/StoreKitConfiguration.storekit
         buildPhase: none
     settings:
@@ -41,6 +55,7 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.jiejuefuyou.altitudenow
         PRODUCT_NAME: AltitudeNow
         INFOPLIST_KEY_CFBundleDisplayName: AltitudeNow
+        INFOPLIST_KEY_CFBundleLocalizations: "en ja zh-Hans zh-Hant ko es fr de"
         INFOPLIST_KEY_NSMotionUsageDescription: "AltitudeNow reads the device's barometric pressure sensor to compute relative altitude. No motion data leaves your device."
         INFOPLIST_KEY_UILaunchScreen_Generation: "YES"
         INFOPLIST_KEY_UIApplicationSceneManifest_Generation: "YES"

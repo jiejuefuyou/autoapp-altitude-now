@@ -1,3 +1,4 @@
+/* AltitudeNow — 日本語 (ja) */
 /* Japan 100 Famous Mountains feature */
 "japan_mountains_title" = "日本百名山";
 "japan_mountains_nav_title" = "100名山";
@@ -8,3 +9,78 @@
 "japan_mountains_elevation_unit" = "m";
 "japan_mountains_prefilled_alert" = "セッション名と参照標高を入力しました。";
 "japan_mountains_load_error" = "山データを読み込めませんでした。";
+
+/* Main screen */
+"AltitudeNow" = "AltitudeNow";
+"Altitude" = "標高";
+"Pressure" = "気圧";
+"Live altitude" = "リアルタイム標高";
+"Press Start to record" = "「開始」を押すと記録が始まります";
+"Session name (optional)" = "セッション名(任意)";
+"Start" = "開始";
+"Stop" = "停止";
+"Reset" = "リセット";
+"No barometric sensor" = "気圧センサーがありません";
+"AltitudeNow needs a device with a barometric pressure sensor. iPhone 6 and newer all have one. The iOS Simulator does not." = "AltitudeNow には気圧センサー付きの端末が必要です。iPhone 6 以降にはすべて搭載されていますが、iOS シミュレータには搭載されていません。";
+
+/* Sessions */
+"Sessions" = "セッション";
+"No sessions yet" = "セッションはまだありません";
+"Start a recording to log altitude over time." = "記録を開始すると標高の推移が保存されます。";
+"Done" = "完了";
+"Clear" = "消去";
+"Export CSV" = "CSV を書き出す";
+"max" = "最大";
+"min" = "最小";
+"gain" = "獲得";
+"%lld older sessions hidden" = "古いセッション %lld 件は非表示";
+"Unlock with Premium" = "プレミアムで解除";
+
+/* Onboarding */
+"Reads your iPhone's barometer" = "iPhone の気圧センサーを使用";
+"Live altitude and pressure, sensor only — no GPS required." = "GPS 不要、センサーのみで標高と気圧をリアルタイム表示。";
+"Logs every session" = "セッションを自動記録";
+"Tap Start to begin. The chart grows as you move." = "「開始」をタップ。動くほどグラフが伸びていきます。";
+"Stays on your phone" = "あなたの iPhone の中だけで完結";
+"No accounts, no network, no data collection. Ever." = "アカウント不要、通信なし、データ収集なし。";
+"Get started" = "はじめる";
+"Next" = "次へ";
+
+/* Paywall */
+"AltitudeNow Premium" = "AltitudeNow プレミアム";
+"One-time purchase. No subscription. Unlock everything forever." = "買い切り型。サブスクなし。すべての機能を永久に解放します。";
+"Unlimited session history" = "セッション履歴 無制限";
+"Detailed altitude charts" = "詳細な標高グラフ";
+"CSV export" = "CSV 書き出し";
+"Custom calibration offset" = "標高オフセットの校正";
+"Imperial / metric units" = "ヤード/メートル単位の切替";
+"Restore Purchase" = "購入を復元";
+"No subscription. No data collected. Ever." = "サブスクなし、データ収集なし。";
+"Payment will be charged to your Apple ID. This is a one-time purchase that unlocks all premium features for the lifetime of your Apple ID." = "代金はお客様の Apple ID に請求されます。買い切りのため、お客様の Apple ID で永続的にすべてのプレミアム機能をご利用いただけます。";
+"Close" = "閉じる";
+"Premium unlocked" = "プレミアム解放済み";
+"Processing…" = "処理中…";
+"Unlock for %@" = "%@ で解除";
+
+/* Settings */
+"Settings" = "設定";
+"Units" = "単位";
+"Calibration" = "校正";
+"Offset (m)" = "オフセット(m)";
+"Apply" = "適用";
+"Calibration is a Premium feature" = "校正はプレミアム機能です";
+"Add a constant offset (in meters) to align the relative altitude with a known reference point." = "既知の基準点に合わせるため、相対標高に一定のオフセット(m)を加えます。";
+"Premium" = "プレミアム";
+"Unlock Premium" = "プレミアムを解除";
+"Sensor" = "センサー";
+"Available" = "利用可能";
+"Yes" = "はい";
+"No" = "いいえ";
+"About" = "このアプリについて";
+"Version" = "バージョン";
+"Build" = "ビルド";
+"Privacy Policy" = "プライバシーポリシー";
+"Terms of Use" = "利用規約";
+"No data collected. Ever." = "データ収集は一切ありません。";
+"Language" = "言語";
+"System default" = "システム設定に従う";

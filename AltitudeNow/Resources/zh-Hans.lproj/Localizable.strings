@@ -1,0 +1,86 @@
+/* AltitudeNow — 简体中文 (zh-Hans) */
+/* Japan 100 Famous Mountains feature */
+"japan_mountains_title" = "日本百名山";
+"japan_mountains_nav_title" = "百名山";
+"japan_mountains_search_placeholder" = "搜索山岳";
+"japan_mountains_region_label" = "地区";
+"japan_mountains_region_all" = "全部地区";
+"japan_mountains_choose_button" = "选择百名山";
+"japan_mountains_elevation_unit" = "米";
+"japan_mountains_prefilled_alert" = "已自动填入会话名称和参考海拔。";
+"japan_mountains_load_error" = "无法加载山岳数据。";
+
+/* Main screen */
+"AltitudeNow" = "AltitudeNow";
+"Altitude" = "海拔";
+"Pressure" = "气压";
+"Live altitude" = "实时海拔";
+"Press Start to record" = "按「开始」即可记录";
+"Session name (optional)" = "会话名称(可选)";
+"Start" = "开始";
+"Stop" = "停止";
+"Reset" = "重置";
+"No barometric sensor" = "未检测到气压传感器";
+"AltitudeNow needs a device with a barometric pressure sensor. iPhone 6 and newer all have one. The iOS Simulator does not." = "AltitudeNow 需要带有气压传感器的设备。iPhone 6 及更新机型均有,但 iOS 模拟器不支持。";
+
+/* Sessions */
+"Sessions" = "会话";
+"No sessions yet" = "还没有会话";
+"Start a recording to log altitude over time." = "开始记录后,海拔变化将自动保存。";
+"Done" = "完成";
+"Clear" = "清空";
+"Export CSV" = "导出 CSV";
+"max" = "最大";
+"min" = "最小";
+"gain" = "累积";
+"%lld older sessions hidden" = "已隐藏 %lld 条更早的会话";
+"Unlock with Premium" = "升级会员解锁";
+
+/* Onboarding */
+"Reads your iPhone's barometer" = "读取 iPhone 的气压传感器";
+"Live altitude and pressure, sensor only — no GPS required." = "无需 GPS,仅用传感器即可实时显示海拔和气压。";
+"Logs every session" = "每段记录全程保存";
+"Tap Start to begin. The chart grows as you move." = "点「开始」即可记录。走得越多,曲线越长。";
+"Stays on your phone" = "数据只留在你的 iPhone";
+"No accounts, no network, no data collection. Ever." = "无需账号、无需联网、永不采集数据。";
+"Get started" = "开始使用";
+"Next" = "下一步";
+
+/* Paywall */
+"AltitudeNow Premium" = "AltitudeNow 会员";
+"One-time purchase. No subscription. Unlock everything forever." = "一次买断,无需订阅,永久解锁全部功能。";
+"Unlimited session history" = "会话历史无限";
+"Detailed altitude charts" = "精细海拔图表";
+"CSV export" = "CSV 导出";
+"Custom calibration offset" = "自定义海拔校准";
+"Imperial / metric units" = "公制/英制切换";
+"Restore Purchase" = "恢复购买";
+"No subscription. No data collected. Ever." = "无订阅、永不采集数据。";
+"Payment will be charged to your Apple ID. This is a one-time purchase that unlocks all premium features for the lifetime of your Apple ID." = "费用将通过您的 Apple ID 进行扣款。本次为一次性买断,您的 Apple ID 将永久享有全部会员功能。";
+"Close" = "关闭";
+"Premium unlocked" = "已解锁会员";
+"Processing…" = "处理中…";
+"Unlock for %@" = "%@ 解锁";
+
+/* Settings */
+"Settings" = "设置";
+"Units" = "单位";
+"Calibration" = "校准";
+"Offset (m)" = "偏移(米)";
+"Apply" = "应用";
+"Calibration is a Premium feature" = "校准为会员功能";
+"Add a constant offset (in meters) to align the relative altitude with a known reference point." = "添加一个固定偏移(米),将相对海拔与已知参考点对齐。";
+"Premium" = "会员";
+"Unlock Premium" = "解锁会员";
+"Sensor" = "传感器";
+"Available" = "可用";
+"Yes" = "是";
+"No" = "否";
+"About" = "关于";
+"Version" = "版本";
+"Build" = "构建版本";
+"Privacy Policy" = "隐私政策";
+"Terms of Use" = "使用条款";
+"No data collected. Ever." = "永不收集任何数据。";
+"Language" = "语言";
+"System default" = "跟随系统";

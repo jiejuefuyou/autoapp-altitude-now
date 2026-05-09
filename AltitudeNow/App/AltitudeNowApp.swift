@@ -4,6 +4,7 @@ import SwiftUI
 struct AltitudeNowApp: App {
     @State private var store = AltimeterStore()
     @State private var iap = IAPManager()
+    @State private var l10n = LocalizationManager.shared
 
     init() {
         // Snapshot mode: skip onboarding so UI tests land directly on the main screen.
@@ -17,6 +18,8 @@ struct AltitudeNowApp: App {
             ContentView()
                 .environment(store)
                 .environment(iap)
+                .environment(l10n)
+                .environment(\.locale, l10n.currentLocale)
                 .task { await iap.refresh() }
                 .tint(.accentColor)
         }

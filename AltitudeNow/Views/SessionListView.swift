@@ -17,8 +17,8 @@ struct SessionListView: View {
         NavigationStack {
             Group {
                 if store.sessions.isEmpty {
-                    ContentUnavailableView("No sessions yet", systemImage: "list.bullet.clipboard",
-                                           description: Text("Start a recording to log altitude over time."))
+                    ContentUnavailableView(LocalizedStringKey("No sessions yet"), systemImage: "list.bullet.clipboard",
+                                           description: Text(LocalizedStringKey("Start a recording to log altitude over time.")))
                 } else {
                     List {
                         ForEach(visibleSessions) { s in row(s) }
@@ -31,15 +31,15 @@ struct SessionListView: View {
                     }
                 }
             }
-            .navigationTitle("Sessions")
+            .navigationTitle(Text("Sessions"))
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     if iap.isPremium && !store.sessions.isEmpty {
-                        Button("Clear", role: .destructive) { store.clearSessions() }
+                        Button(LocalizedStringKey("Clear"), role: .destructive) { store.clearSessions() }
                     }
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Done") { dismiss() }
+                    Button(LocalizedStringKey("Done")) { dismiss() }
                 }
             }
             .sheet(isPresented: $showPaywall) { PaywallView() }
@@ -58,13 +58,13 @@ struct SessionListView: View {
                         Image(systemName: "square.and.arrow.up").font(.caption)
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel("Export CSV")
+                    .accessibilityLabel(Text("Export CSV"))
                 }
             }
             HStack(spacing: 16) {
-                stat("max", store.altitudeUnit.formatted(s.maxAltitude))
-                stat("min", store.altitudeUnit.formatted(s.minAltitude))
-                stat("gain", store.altitudeUnit.formatted(s.altitudeGain))
+                stat(LocalizedStringKey("max"), store.altitudeUnit.formatted(s.maxAltitude))
+                stat(LocalizedStringKey("min"), store.altitudeUnit.formatted(s.minAltitude))
+                stat(LocalizedStringKey("gain"), store.altitudeUnit.formatted(s.altitudeGain))
             }
             if s.readings.count > 2 {
                 Chart {
@@ -80,9 +80,9 @@ struct SessionListView: View {
         .padding(.vertical, 4)
     }
 
-    private func stat(_ label: String, _ value: String) -> some View {
+    private func stat(_ key: LocalizedStringKey, _ value: String) -> some View {
         HStack(spacing: 3) {
-            Text(label).font(.caption2).foregroundStyle(.secondary)
+            Text(key).font(.caption2).foregroundStyle(.secondary)
             Text(value).font(.caption.monospacedDigit())
         }
     }
@@ -91,7 +91,7 @@ struct SessionListView: View {
         VStack(alignment: .leading, spacing: 6) {
             Label("\(store.sessions.count - 1) older sessions hidden", systemImage: "lock.fill")
                 .foregroundStyle(.secondary)
-            Button("Unlock with Premium") { showPaywall = true }
+            Button(LocalizedStringKey("Unlock with Premium")) { showPaywall = true }
                 .font(.footnote.weight(.semibold))
         }
     }

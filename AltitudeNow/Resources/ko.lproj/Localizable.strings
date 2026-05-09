@@ -1,0 +1,86 @@
+/* AltitudeNow — 한국어 (ko) */
+/* Japan 100 Famous Mountains feature */
+"japan_mountains_title" = "일본 100대 명산";
+"japan_mountains_nav_title" = "100명산";
+"japan_mountains_search_placeholder" = "산 검색";
+"japan_mountains_region_label" = "지역";
+"japan_mountains_region_all" = "모든 지역";
+"japan_mountains_choose_button" = "100명산에서 선택";
+"japan_mountains_elevation_unit" = "m";
+"japan_mountains_prefilled_alert" = "세션 이름과 기준 고도를 자동으로 입력했어요.";
+"japan_mountains_load_error" = "산 데이터를 불러오지 못했습니다.";
+
+/* Main screen */
+"AltitudeNow" = "AltitudeNow";
+"Altitude" = "고도";
+"Pressure" = "기압";
+"Live altitude" = "실시간 고도";
+"Press Start to record" = "시작을 누르면 기록됩니다";
+"Session name (optional)" = "세션 이름(선택)";
+"Start" = "시작";
+"Stop" = "정지";
+"Reset" = "재설정";
+"No barometric sensor" = "기압 센서가 없어요";
+"AltitudeNow needs a device with a barometric pressure sensor. iPhone 6 and newer all have one. The iOS Simulator does not." = "AltitudeNow는 기압 센서가 있는 기기가 필요합니다. iPhone 6 이후 모델은 모두 내장되어 있으며, iOS 시뮬레이터에는 없습니다.";
+
+/* Sessions */
+"Sessions" = "세션";
+"No sessions yet" = "아직 세션이 없어요";
+"Start a recording to log altitude over time." = "기록을 시작하면 고도 변화가 저장돼요.";
+"Done" = "완료";
+"Clear" = "지우기";
+"Export CSV" = "CSV 내보내기";
+"max" = "최대";
+"min" = "최소";
+"gain" = "누적";
+"%lld older sessions hidden" = "이전 세션 %lld개 숨김";
+"Unlock with Premium" = "프리미엄으로 잠금 해제";
+
+/* Onboarding */
+"Reads your iPhone's barometer" = "iPhone의 기압계를 사용";
+"Live altitude and pressure, sensor only — no GPS required." = "GPS 없이 센서만으로 고도와 기압을 실시간 표시.";
+"Logs every session" = "모든 세션을 기록";
+"Tap Start to begin. The chart grows as you move." = "시작을 눌러 기록을 시작하세요. 움직일수록 차트가 길어져요.";
+"Stays on your phone" = "iPhone 안에서만 보관";
+"No accounts, no network, no data collection. Ever." = "계정 없음, 네트워크 없음, 데이터 수집 없음.";
+"Get started" = "시작하기";
+"Next" = "다음";
+
+/* Paywall */
+"AltitudeNow Premium" = "AltitudeNow 프리미엄";
+"One-time purchase. No subscription. Unlock everything forever." = "한 번 결제로 끝. 구독 없음. 모든 기능을 영원히 해제.";
+"Unlimited session history" = "무제한 세션 기록";
+"Detailed altitude charts" = "정밀한 고도 차트";
+"CSV export" = "CSV 내보내기";
+"Custom calibration offset" = "맞춤 캘리브레이션 오프셋";
+"Imperial / metric units" = "야드/미터 단위 전환";
+"Restore Purchase" = "구입 복원";
+"No subscription. No data collected. Ever." = "구독 없음, 데이터 수집 없음.";
+"Payment will be charged to your Apple ID. This is a one-time purchase that unlocks all premium features for the lifetime of your Apple ID." = "결제는 Apple ID로 청구됩니다. 일회성 구매이며 해당 Apple ID로 평생 모든 프리미엄 기능을 사용할 수 있습니다.";
+"Close" = "닫기";
+"Premium unlocked" = "프리미엄 잠금 해제됨";
+"Processing…" = "처리 중…";
+"Unlock for %@" = "%@에 잠금 해제";
+
+/* Settings */
+"Settings" = "설정";
+"Units" = "단위";
+"Calibration" = "캘리브레이션";
+"Offset (m)" = "오프셋 (m)";
+"Apply" = "적용";
+"Calibration is a Premium feature" = "캘리브레이션은 프리미엄 기능입니다";
+"Add a constant offset (in meters) to align the relative altitude with a known reference point." = "이미 알고 있는 기준점에 맞추도록 상대 고도에 일정한 오프셋(미터)을 더합니다.";
+"Premium" = "프리미엄";
+"Unlock Premium" = "프리미엄 잠금 해제";
+"Sensor" = "센서";
+"Available" = "사용 가능";
+"Yes" = "예";
+"No" = "아니요";
+"About" = "정보";
+"Version" = "버전";
+"Build" = "빌드";
+"Privacy Policy" = "개인정보 처리방침";
+"Terms of Use" = "이용 약관";
+"No data collected. Ever." = "어떤 데이터도 수집하지 않습니다.";
+"Language" = "언어";
+"System default" = "시스템 설정 따르기";

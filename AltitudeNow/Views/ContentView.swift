@@ -26,7 +26,7 @@ struct ContentView: View {
                 }
             }
             .padding()
-            .navigationTitle("AltitudeNow")
+            .navigationTitle(Text("AltitudeNow"))
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button { showSessions = true } label: { Image(systemName: "list.bullet.clipboard") }
@@ -54,18 +54,18 @@ struct ContentView: View {
 
     private var readouts: some View {
         HStack(spacing: 16) {
-            readoutCard(title: "Altitude",
+            readoutCard(titleKey: "Altitude",
                         value: store.altitudeUnit.formatted(store.current?.relativeAltitude ?? 0),
                         icon: "mountain.2")
-            readoutCard(title: "Pressure",
+            readoutCard(titleKey: "Pressure",
                         value: store.pressureUnit.formatted(kPa: store.current?.pressure ?? 0),
                         icon: "barometer")
         }
     }
 
-    private func readoutCard(title: String, value: String, icon: String) -> some View {
+    private func readoutCard(titleKey: LocalizedStringKey, value: String, icon: String) -> some View {
         VStack(alignment: .leading, spacing: 6) {
-            Label(title, systemImage: icon).font(.caption).foregroundStyle(.secondary)
+            Label(titleKey, systemImage: icon).font(.caption).foregroundStyle(.secondary)
             Text(value).font(.system(.title2, design: .rounded, weight: .semibold)).contentTransition(.numericText())
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -77,14 +77,14 @@ struct ContentView: View {
         let readings = store.liveSession?.readings ?? []
         return VStack(alignment: .leading, spacing: 8) {
             HStack {
-                Label("Live altitude", systemImage: "waveform.path.ecg").font(.caption).foregroundStyle(.secondary)
+                Label(LocalizedStringKey("Live altitude"), systemImage: "waveform.path.ecg").font(.caption).foregroundStyle(.secondary)
                 Spacer()
                 if let s = store.liveSession {
                     Text(s.startedAt, style: .timer).font(.caption.monospacedDigit())
                 }
             }
             if readings.isEmpty {
-                ContentUnavailableView("Press Start to record", systemImage: "play.circle")
+                ContentUnavailableView(LocalizedStringKey("Press Start to record"), systemImage: "play.circle")
                     .frame(height: 180)
             } else {
                 Chart {
@@ -106,7 +106,7 @@ struct ContentView: View {
             if !store.isRunning {
                 // Session name field — pre-filled from 100名山 picker or typed manually
                 HStack(spacing: 8) {
-                    TextField("Session name (optional)", text: $pendingSessionName)
+                    TextField(LocalizedStringKey("Session name (optional)"), text: $pendingSessionName)
                         .textFieldStyle(.roundedBorder)
                     Button {
                         showMountainList = true
@@ -119,7 +119,7 @@ struct ContentView: View {
                         .padding(8)
                     }
                     .buttonStyle(.bordered)
-                    .accessibilityLabel(String(localized: "japan_mountains_choose_button"))
+                    .accessibilityLabel(Text("japan_mountains_choose_button"))
                 }
             }
             HStack(spacing: 12) {
@@ -130,7 +130,7 @@ struct ContentView: View {
                     store.start(name: name.isEmpty ? nil : name)
                     pendingSessionName = ""
                 } label: {
-                    Label("Start", systemImage: "play.fill").frame(maxWidth: .infinity).padding()
+                    Label(LocalizedStringKey("Start"), systemImage: "play.fill").frame(maxWidth: .infinity).padding()
                 }
                 .buttonStyle(.borderedProminent)
             } else {
@@ -139,7 +139,7 @@ struct ContentView: View {
                     store.stop()
                     Haptics.success()
                 } label: {
-                    Label("Stop", systemImage: "stop.fill").frame(maxWidth: .infinity).padding()
+                    Label(LocalizedStringKey("Stop"), systemImage: "stop.fill").frame(maxWidth: .infinity).padding()
                 }
                 .buttonStyle(.borderedProminent).tint(.red)
 
@@ -147,7 +147,7 @@ struct ContentView: View {
                     Haptics.light()
                     store.reset()
                 } label: {
-                    Label("Reset", systemImage: "arrow.counterclockwise")
+                    Label(LocalizedStringKey("Reset"), systemImage: "arrow.counterclockwise")
                         .frame(maxWidth: .infinity).padding()
                 }
                 .buttonStyle(.bordered)
@@ -158,9 +158,9 @@ struct ContentView: View {
 
     private var unsupportedDevice: some View {
         ContentUnavailableView {
-            Label("No barometric sensor", systemImage: "exclamationmark.triangle")
+            Label(LocalizedStringKey("No barometric sensor"), systemImage: "exclamationmark.triangle")
         } description: {
-            Text("AltitudeNow needs a device with a barometric pressure sensor. iPhone 6 and newer all have one. The iOS Simulator does not.")
+            Text(LocalizedStringKey("AltitudeNow needs a device with a barometric pressure sensor. iPhone 6 and newer all have one. The iOS Simulator does not."))
         }
     }
 }

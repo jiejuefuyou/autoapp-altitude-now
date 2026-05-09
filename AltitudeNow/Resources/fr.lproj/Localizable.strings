@@ -1,0 +1,86 @@
+/* AltitudeNow — Français (fr) */
+/* Japan 100 Famous Mountains feature */
+"japan_mountains_title" = "100 montagnes célèbres du Japon";
+"japan_mountains_nav_title" = "100 monts";
+"japan_mountains_search_placeholder" = "Rechercher une montagne";
+"japan_mountains_region_label" = "Région";
+"japan_mountains_region_all" = "Toutes les régions";
+"japan_mountains_choose_button" = "Choisir parmi les 100 monts";
+"japan_mountains_elevation_unit" = "m";
+"japan_mountains_prefilled_alert" = "Nom de session et altitude de référence pré-remplis.";
+"japan_mountains_load_error" = "Impossible de charger les données des montagnes.";
+
+/* Main screen */
+"AltitudeNow" = "AltitudeNow";
+"Altitude" = "Altitude";
+"Pressure" = "Pression";
+"Live altitude" = "Altitude en direct";
+"Press Start to record" = "Appuyez sur Démarrer pour enregistrer";
+"Session name (optional)" = "Nom de la session (facultatif)";
+"Start" = "Démarrer";
+"Stop" = "Arrêter";
+"Reset" = "Réinitialiser";
+"No barometric sensor" = "Aucun capteur barométrique";
+"AltitudeNow needs a device with a barometric pressure sensor. iPhone 6 and newer all have one. The iOS Simulator does not." = "AltitudeNow nécessite un appareil équipé d'un capteur barométrique. L'iPhone 6 et les modèles ultérieurs en disposent ; le simulateur iOS, non.";
+
+/* Sessions */
+"Sessions" = "Sessions";
+"No sessions yet" = "Aucune session pour l'instant";
+"Start a recording to log altitude over time." = "Lancez un enregistrement pour suivre l'altitude dans le temps.";
+"Done" = "OK";
+"Clear" = "Effacer";
+"Export CSV" = "Exporter en CSV";
+"max" = "max";
+"min" = "min";
+"gain" = "gain";
+"%lld older sessions hidden" = "%lld sessions plus anciennes masquées";
+"Unlock with Premium" = "Débloquer avec Premium";
+
+/* Onboarding */
+"Reads your iPhone's barometer" = "Utilise le baromètre de votre iPhone";
+"Live altitude and pressure, sensor only — no GPS required." = "Altitude et pression en direct, capteur uniquement — sans GPS.";
+"Logs every session" = "Enregistre chaque session";
+"Tap Start to begin. The chart grows as you move." = "Appuyez sur Démarrer pour commencer. Le graphique évolue avec vos déplacements.";
+"Stays on your phone" = "Tout reste sur votre iPhone";
+"No accounts, no network, no data collection. Ever." = "Sans compte, sans réseau, sans collecte de données. Jamais.";
+"Get started" = "Commencer";
+"Next" = "Suivant";
+
+/* Paywall */
+"AltitudeNow Premium" = "AltitudeNow Premium";
+"One-time purchase. No subscription. Unlock everything forever." = "Achat unique. Sans abonnement. Tout débloqué à vie.";
+"Unlimited session history" = "Historique de sessions illimité";
+"Detailed altitude charts" = "Graphiques d'altitude détaillés";
+"CSV export" = "Exportation CSV";
+"Custom calibration offset" = "Décalage d'étalonnage personnalisé";
+"Imperial / metric units" = "Unités impériales / métriques";
+"Restore Purchase" = "Restaurer l'achat";
+"No subscription. No data collected. Ever." = "Sans abonnement. Aucune donnée collectée.";
+"Payment will be charged to your Apple ID. This is a one-time purchase that unlocks all premium features for the lifetime of your Apple ID." = "Le paiement sera débité de votre identifiant Apple. Cet achat unique débloque toutes les fonctionnalités Premium à vie pour votre identifiant Apple.";
+"Close" = "Fermer";
+"Premium unlocked" = "Premium activé";
+"Processing…" = "Traitement…";
+"Unlock for %@" = "Débloquer pour %@";
+
+/* Settings */
+"Settings" = "Réglages";
+"Units" = "Unités";
+"Calibration" = "Étalonnage";
+"Offset (m)" = "Décalage (m)";
+"Apply" = "Appliquer";
+"Calibration is a Premium feature" = "L'étalonnage est une fonctionnalité Premium";
+"Add a constant offset (in meters) to align the relative altitude with a known reference point." = "Ajoutez un décalage constant (en mètres) pour aligner l'altitude relative sur un point de référence connu.";
+"Premium" = "Premium";
+"Unlock Premium" = "Activer Premium";
+"Sensor" = "Capteur";
+"Available" = "Disponible";
+"Yes" = "Oui";
+"No" = "Non";
+"About" = "À propos";
+"Version" = "Version";
+"Build" = "Build";
+"Privacy Policy" = "Politique de confidentialité";
+"Terms of Use" = "Conditions d'utilisation";
+"No data collected. Ever." = "Aucune donnée collectée. Jamais.";
+"Language" = "Langue";
+"System default" = "Réglage du système";
