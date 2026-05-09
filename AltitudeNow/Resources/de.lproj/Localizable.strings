@@ -84,3 +84,27 @@
 "No data collected. Ever." = "Keinerlei Datenerhebung.";
 "Language" = "Sprache";
 "System default" = "Systemeinstellung";
+
+/* Quick switch (multi-mountain favorites) */
+"Quick switch" = "Schnellumschalter";
+"Favorite" = "Favorit";
+"Unfavorite" = "Aus Favoriten entfernen";
+"Favorites" = "Favoriten";
+
+/* Session detail */
+"Summary" = "Übersicht";
+"Altitude over time" = "Höhe im Zeitverlauf";
+"Not enough data" = "Nicht genug Daten";
+"This session has too few readings to plot." = "Diese Sitzung hat zu wenige Messpunkte für ein Diagramm.";
+"Details" = "Details";
+"Started" = "Start";
+"Ended" = "Ende";
+"Duration" = "Dauer";
+"Readings" = "Messpunkte";
+
+/* Apple Health */
+"Apple Health" = "Apple Health";
+"Sync altitude to Apple Health" = "Höhe mit Apple Health synchronisieren";
+"Sync altitude to Apple Health is a Premium feature" = "Die Synchronisierung mit Apple Health ist eine Premium-Funktion";
+"When enabled, finished sessions are saved as workouts in Apple Health with your elevation gain." = "Wenn aktiviert, werden beendete Sitzungen als Workouts mit deinem Höhenanstieg in Apple Health gespeichert.";
+"Apple Health is not available on this device." = "Apple Health ist auf diesem Gerät nicht verfügbar.";

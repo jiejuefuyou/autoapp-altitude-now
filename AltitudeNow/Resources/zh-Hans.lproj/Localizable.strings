@@ -84,3 +84,27 @@
 "No data collected. Ever." = "永不收集任何数据。";
 "Language" = "语言";
 "System default" = "跟随系统";
+
+/* Quick switch (multi-mountain favorites) */
+"Quick switch" = "快速切换";
+"Favorite" = "收藏";
+"Unfavorite" = "取消收藏";
+"Favorites" = "收藏";
+
+/* Session detail */
+"Summary" = "摘要";
+"Altitude over time" = "海拔随时间变化";
+"Not enough data" = "数据不足";
+"This session has too few readings to plot." = "本次会话的记录点太少,无法绘制图表。";
+"Details" = "详情";
+"Started" = "开始";
+"Ended" = "结束";
+"Duration" = "时长";
+"Readings" = "记录点数";
+
+/* Apple Health */
+"Apple Health" = "Apple 健康";
+"Sync altitude to Apple Health" = "同步海拔到 Apple 健康";
+"Sync altitude to Apple Health is a Premium feature" = "同步到 Apple 健康为会员功能";
+"When enabled, finished sessions are saved as workouts in Apple Health with your elevation gain." = "开启后,完成的会话会作为带累积海拔的训练记录保存到 Apple 健康。";
+"Apple Health is not available on this device." = "此设备不支持 Apple 健康。";

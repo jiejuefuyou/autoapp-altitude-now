@@ -6,6 +6,7 @@ struct ContentView: View {
     @Environment(IAPManager.self) private var iap
 
     @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding: Bool = false
+    @AppStorage(FavoriteMountains.storageKey) private var favoritedRaw: String = ""
 
     @State private var showSessions = false
     @State private var showSettings = false
@@ -13,10 +14,18 @@ struct ContentView: View {
     @State private var showMountainList = false
     @State private var pendingSessionName: String = ""
 
+    private var quickSwitchMountains: [Mountain] {
+        let ids = FavoriteMountains.decode(favoritedRaw).prefix(FavoriteMountains.maxQuickSwitch)
+        return ids.compactMap { MountainData.mountain(for: $0) }
+    }
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 16) {
                 if AltimeterStore.isSensorAvailable {
+                    if !quickSwitchMountains.isEmpty && !store.isRunning {
+                        quickSwitchBar
+                    }
                     readouts
                     chartCard
                     Spacer(minLength: 0)
@@ -50,6 +59,42 @@ struct ContentView: View {
                 OnboardingView(hasSeenOnboarding: $hasSeenOnboarding)
             }
         }
+    }
+
+    /// Top quick-switch bar: a dropdown of the user's top 3 favorited
+    /// mountains, plus a "More…" entry that opens the full picker. Only
+    /// shown when at least one mountain is favorited and no session is live.
+    private var quickSwitchBar: some View {
+        Menu {
+            ForEach(quickSwitchMountains) { m in
+                Button {
+                    pendingSessionName = m.name_ja
+                } label: {
+                    Label("\(m.name_ja) · \(m.elevation_m) m", systemImage: "star.fill")
+                }
+            }
+            Divider()
+            Button {
+                showMountainList = true
+            } label: {
+                Label(
+                    String(localized: "japan_mountains_choose_button"),
+                    systemImage: "list.bullet"
+                )
+            }
+        } label: {
+            HStack(spacing: 8) {
+                Image(systemName: "mountain.2")
+                Text(LocalizedStringKey("Quick switch")).font(.subheadline.weight(.medium))
+                Spacer()
+                Image(systemName: "chevron.down").font(.caption)
+            }
+            .foregroundStyle(.primary)
+            .padding(.horizontal, 14)
+            .padding(.vertical, 10)
+            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 12))
+        }
+        .accessibilityLabel(Text("Quick switch"))
     }
 
     private var readouts: some View {
@@ -136,8 +181,13 @@ struct ContentView: View {
             } else {
                 Button {
                     Haptics.medium()
-                    store.stop()
+                    let savedSession = store.stopAndReturnSavedSession()
                     Haptics.success()
+                    if iap.isPremium,
+                       UserDefaults.standard.bool(forKey: "syncAltitudeToAppleHealth"),
+                       let s = savedSession {
+                        Task { await HealthService.shared.saveSessionAsWorkout(s) }
+                    }
                 } label: {
                     Label(LocalizedStringKey("Stop"), systemImage: "stop.fill").frame(maxWidth: .infinity).padding()
                 }

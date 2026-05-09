@@ -27,7 +27,7 @@ struct Mountain: Identifiable, Codable {
 
 // MARK: - Mountain Data
 
-private enum MountainData {
+enum MountainData {
     static let all: [Mountain] = {
         guard
             let url  = Bundle.main.url(forResource: "JapanMountains", withExtension: "json"),
@@ -47,6 +47,41 @@ private enum MountainData {
             return m.region
         }
     }
+
+    /// Look up a mountain by its integer ID. Returns `nil` if missing
+    /// (e.g. the user upgraded from a build with a different dataset).
+    static func mountain(for id: Int) -> Mountain? {
+        all.first { $0.id == id }
+    }
+}
+
+/// Read/write the user's favorited mountain IDs through `@AppStorage`.
+/// Stored as a comma-separated list of integers in `UserDefaults` to avoid
+/// the array-encoding limitations of `@AppStorage`.
+enum FavoriteMountains {
+    static let storageKey = "favoritedMountainIDs"
+    static let maxQuickSwitch = 3
+
+    static func decode(_ raw: String) -> [Int] {
+        raw
+            .split(separator: ",")
+            .compactMap { Int($0.trimmingCharacters(in: .whitespaces)) }
+    }
+
+    static func encode(_ ids: [Int]) -> String {
+        ids.map(String.init).joined(separator: ",")
+    }
+
+    /// Toggle membership and return the new ordered list. Newly-added IDs
+    /// are appended to the end so the user keeps their preferred ordering.
+    static func toggled(_ id: Int, in current: [Int]) -> [Int] {
+        if let idx = current.firstIndex(of: id) {
+            var next = current
+            next.remove(at: idx)
+            return next
+        }
+        return current + [id]
+    }
 }
 
 // MARK: - MountainListView
@@ -58,8 +93,16 @@ struct MountainListView: View {
 
     @Environment(\.dismiss) private var dismiss
 
+    @AppStorage(FavoriteMountains.storageKey) private var favoritedRaw: String = ""
+
     @State private var searchText  = ""
     @State private var regionFilter = String(localized: "japan_mountains_region_all")
+
+    private var favoriteIDs: [Int] { FavoriteMountains.decode(favoritedRaw) }
+
+    private var favoriteMountains: [Mountain] {
+        favoriteIDs.compactMap { MountainData.mountain(for: $0) }
+    }
 
     private var allRegions: [String] {
         [String(localized: "japan_mountains_region_all")] + MountainData.regions
@@ -67,14 +110,26 @@ struct MountainListView: View {
 
     private var filtered: [Mountain] {
         let allLabel = String(localized: "japan_mountains_region_all")
+        let favoriteSet = Set(favoriteIDs)
         return MountainData.all.filter { m in
             let regionMatch = regionFilter == allLabel || m.region == regionFilter
             let searchMatch = searchText.isEmpty
                 || m.name_ja.localizedCaseInsensitiveContains(searchText)
                 || m.name_en.localizedCaseInsensitiveContains(searchText)
                 || m.prefecture.localizedCaseInsensitiveContains(searchText)
-            return regionMatch && searchMatch
+            // Hide favorites from the main list — they have their own section
+            // when there's no active search/filter.
+            let inFavoriteSection = searchText.isEmpty
+                && regionFilter == allLabel
+                && favoriteSet.contains(m.id)
+            return regionMatch && searchMatch && !inFavoriteSection
         }
+    }
+
+    private var showFavoriteSection: Bool {
+        !favoriteMountains.isEmpty
+            && searchText.isEmpty
+            && regionFilter == String(localized: "japan_mountains_region_all")
     }
 
     var body: some View {
@@ -134,27 +189,86 @@ struct MountainListView: View {
                     String(localized: "japan_mountains_load_error"),
                     systemImage: "exclamationmark.triangle"
                 )
-            } else if filtered.isEmpty {
+            } else if filtered.isEmpty && !showFavoriteSection {
                 ContentUnavailableView.search(text: searchText)
             } else {
-                List(filtered) { mountain in
-                    mountainRow(mountain)
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            onSelect(mountain.name_ja, mountain.elevation_m)
-                            dismiss()
+                List {
+                    if showFavoriteSection {
+                        Section {
+                            ForEach(favoriteMountains) { mountain in
+                                mountainRow(mountain, isFavorite: true)
+                                    .contentShape(Rectangle())
+                                    .onTapGesture { handleSelect(mountain) }
+                                    .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                                        Button(role: .destructive) {
+                                            toggleFavorite(mountain.id)
+                                        } label: {
+                                            Label(
+                                                LocalizedStringKey("Unfavorite"),
+                                                systemImage: "star.slash"
+                                            )
+                                        }
+                                        .tint(.orange)
+                                    }
+                            }
+                            .onMove(perform: moveFavorites)
+                        } header: {
+                            HStack {
+                                Text(LocalizedStringKey("Favorites"))
+                                Spacer()
+                                EditButton().font(.caption)
+                            }
                         }
+                    }
+                    Section {
+                        ForEach(filtered) { mountain in
+                            mountainRow(mountain, isFavorite: false)
+                                .contentShape(Rectangle())
+                                .onTapGesture { handleSelect(mountain) }
+                                .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                                    Button {
+                                        toggleFavorite(mountain.id)
+                                    } label: {
+                                        Label(
+                                            LocalizedStringKey("Favorite"),
+                                            systemImage: "star.fill"
+                                        )
+                                    }
+                                    .tint(.yellow)
+                                }
+                        }
+                    }
                 }
-                .listStyle(.plain)
+                .listStyle(.insetGrouped)
             }
         }
     }
 
-    private func mountainRow(_ m: Mountain) -> some View {
+    private func handleSelect(_ m: Mountain) {
+        onSelect(m.name_ja, m.elevation_m)
+        dismiss()
+    }
+
+    private func toggleFavorite(_ id: Int) {
+        let next = FavoriteMountains.toggled(id, in: favoriteIDs)
+        favoritedRaw = FavoriteMountains.encode(next)
+    }
+
+    private func moveFavorites(from source: IndexSet, to destination: Int) {
+        var next = favoriteIDs
+        next.move(fromOffsets: source, toOffset: destination)
+        favoritedRaw = FavoriteMountains.encode(next)
+    }
+
+    private func mountainRow(_ m: Mountain, isFavorite: Bool) -> some View {
         HStack {
             VStack(alignment: .leading, spacing: 2) {
-                Text(m.name_ja)
-                    .font(.headline)
+                HStack(spacing: 4) {
+                    if isFavorite {
+                        Image(systemName: "star.fill").font(.caption2).foregroundStyle(.yellow)
+                    }
+                    Text(m.name_ja).font(.headline)
+                }
                 Text(m.name_en)
                     .font(.caption)
                     .foregroundStyle(.secondary)

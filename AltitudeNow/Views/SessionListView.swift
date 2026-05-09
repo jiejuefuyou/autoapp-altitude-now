@@ -21,13 +21,18 @@ struct SessionListView: View {
                                            description: Text(LocalizedStringKey("Start a recording to log altitude over time.")))
                 } else {
                     List {
-                        ForEach(visibleSessions) { s in row(s) }
-                            .onDelete(perform: delete)
+                        ForEach(visibleSessions) { s in
+                            NavigationLink(value: s) { row(s) }
+                        }
+                        .onDelete(perform: delete)
                         if !iap.isPremium && store.sessions.count > 1 {
                             Section {
                                 lockedRow
                             }
                         }
+                    }
+                    .navigationDestination(for: Session.self) { s in
+                        SessionDetailView(session: s)
                     }
                 }
             }

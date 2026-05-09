@@ -84,3 +84,27 @@
 "No data collected. Ever." = "어떤 데이터도 수집하지 않습니다.";
 "Language" = "언어";
 "System default" = "시스템 설정 따르기";
+
+/* Quick switch (multi-mountain favorites) */
+"Quick switch" = "빠른 전환";
+"Favorite" = "즐겨찾기";
+"Unfavorite" = "즐겨찾기 해제";
+"Favorites" = "즐겨찾기";
+
+/* Session detail */
+"Summary" = "요약";
+"Altitude over time" = "시간에 따른 고도";
+"Not enough data" = "데이터가 부족합니다";
+"This session has too few readings to plot." = "이 세션은 기록 지점이 너무 적어 차트를 그릴 수 없어요.";
+"Details" = "세부 정보";
+"Started" = "시작";
+"Ended" = "종료";
+"Duration" = "지속 시간";
+"Readings" = "기록 수";
+
+/* Apple Health */
+"Apple Health" = "Apple 건강";
+"Sync altitude to Apple Health" = "고도를 Apple 건강에 동기화";
+"Sync altitude to Apple Health is a Premium feature" = "Apple 건강 동기화는 프리미엄 기능입니다";
+"When enabled, finished sessions are saved as workouts in Apple Health with your elevation gain." = "켜면 완료된 세션이 누적 고도와 함께 Apple 건강의 운동 기록으로 저장됩니다.";
+"Apple Health is not available on this device." = "이 기기에서는 Apple 건강을 사용할 수 없어요.";

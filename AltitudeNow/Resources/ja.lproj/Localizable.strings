@@ -84,3 +84,27 @@
 "No data collected. Ever." = "データ収集は一切ありません。";
 "Language" = "言語";
 "System default" = "システム設定に従う";
+
+/* Quick switch (multi-mountain favorites) */
+"Quick switch" = "クイック切替";
+"Favorite" = "お気に入り";
+"Unfavorite" = "お気に入りから外す";
+"Favorites" = "お気に入り";
+
+/* Session detail */
+"Summary" = "サマリー";
+"Altitude over time" = "標高の推移";
+"Not enough data" = "データが不足しています";
+"This session has too few readings to plot." = "このセッションは記録点が少なすぎてグラフを描けません。";
+"Details" = "詳細";
+"Started" = "開始";
+"Ended" = "終了";
+"Duration" = "所要時間";
+"Readings" = "記録点数";
+
+/* Apple Health */
+"Apple Health" = "Apple ヘルスケア";
+"Sync altitude to Apple Health" = "標高をヘルスケアに同期";
+"Sync altitude to Apple Health is a Premium feature" = "ヘルスケアへの同期はプレミアム機能です";
+"When enabled, finished sessions are saved as workouts in Apple Health with your elevation gain." = "オンにすると、終了したセッションが獲得標高付きのワークアウトとしてヘルスケアに保存されます。";
+"Apple Health is not available on this device." = "この端末では Apple ヘルスケアを利用できません。";

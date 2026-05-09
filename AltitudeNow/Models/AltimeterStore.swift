@@ -88,10 +88,19 @@ final class AltimeterStore {
     }
 
     func stop() {
-        guard isRunning else { return }
+        _ = stopAndReturnSavedSession()
+    }
+
+    /// Stop the live session and return the persisted `Session` (with `endedAt`
+    /// set) if anything was actually saved. Returns `nil` if the live session
+    /// was empty or if no session was running. Used by the Stop button to
+    /// chain follow-up writes (e.g. Apple Health) without re-querying state.
+    @discardableResult
+    func stopAndReturnSavedSession() -> Session? {
+        guard isRunning else { return nil }
         altimeter.stopRelativeAltitudeUpdates()
         isRunning = false
-        var didSaveSession = false
+        var savedSession: Session?
         if var s = liveSession, !s.readings.isEmpty {
             s.endedAt = .now
             sessions.insert(s, at: 0)
@@ -99,16 +108,17 @@ final class AltimeterStore {
                 sessions = Array(sessions.prefix(Self.sessionsCap))
             }
             save()
-            didSaveSession = true
+            savedSession = s
         }
         liveSession = nil
         current = nil
-        if didSaveSession {
+        if savedSession != nil {
             Task { @MainActor in
                 ReviewService.recordSuccess()
                 ReviewService.maybeRequestReview()
             }
         }
+        return savedSession
     }
 
     func reset() {

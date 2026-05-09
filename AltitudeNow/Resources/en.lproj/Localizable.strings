@@ -84,3 +84,27 @@
 "No data collected. Ever." = "No data collected. Ever.";
 "Language" = "Language";
 "System default" = "System default";
+
+/* Quick switch (multi-mountain favorites) */
+"Quick switch" = "Quick switch";
+"Favorite" = "Favorite";
+"Unfavorite" = "Unfavorite";
+"Favorites" = "Favorites";
+
+/* Session detail */
+"Summary" = "Summary";
+"Altitude over time" = "Altitude over time";
+"Not enough data" = "Not enough data";
+"This session has too few readings to plot." = "This session has too few readings to plot.";
+"Details" = "Details";
+"Started" = "Started";
+"Ended" = "Ended";
+"Duration" = "Duration";
+"Readings" = "Readings";
+
+/* Apple Health */
+"Apple Health" = "Apple Health";
+"Sync altitude to Apple Health" = "Sync altitude to Apple Health";
+"Sync altitude to Apple Health is a Premium feature" = "Sync altitude to Apple Health is a Premium feature";
+"When enabled, finished sessions are saved as workouts in Apple Health with your elevation gain." = "When enabled, finished sessions are saved as workouts in Apple Health with your elevation gain.";
+"Apple Health is not available on this device." = "Apple Health is not available on this device.";

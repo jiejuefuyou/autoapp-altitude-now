@@ -6,8 +6,11 @@ struct SettingsView: View {
     @Environment(LocalizationManager.self) private var l10n
     @Environment(\.dismiss) private var dismiss
 
+    @AppStorage("syncAltitudeToAppleHealth") private var syncAltitudeToHealth: Bool = false
+
     @State private var showPaywall = false
     @State private var calibrationDraft: String = ""
+    @State private var healthRequestInFlight = false
 
     var body: some View {
         @Bindable var store = store
@@ -45,6 +48,38 @@ struct SettingsView: View {
                     Text(LocalizedStringKey("Calibration"))
                 } footer: {
                     Text(LocalizedStringKey("Add a constant offset (in meters) to align the relative altitude with a known reference point."))
+                }
+
+                Section {
+                    if iap.isPremium {
+                        Toggle(isOn: Binding(
+                            get: { syncAltitudeToHealth },
+                            set: { newValue in handleHealthToggle(newValue) }
+                        )) {
+                            Label(
+                                LocalizedStringKey("Sync altitude to Apple Health"),
+                                systemImage: "heart.fill"
+                            )
+                        }
+                        .disabled(healthRequestInFlight || !HealthService.isAvailable)
+                        if !HealthService.isAvailable {
+                            Text(LocalizedStringKey("Apple Health is not available on this device."))
+                                .font(.caption).foregroundStyle(.secondary)
+                        }
+                    } else {
+                        Button {
+                            showPaywall = true
+                        } label: {
+                            Label(
+                                LocalizedStringKey("Sync altitude to Apple Health is a Premium feature"),
+                                systemImage: "lock.fill"
+                            )
+                        }
+                    }
+                } header: {
+                    Text(LocalizedStringKey("Apple Health"))
+                } footer: {
+                    Text(LocalizedStringKey("When enabled, finished sessions are saved as workouts in Apple Health with your elevation gain."))
                 }
 
                 Section(LocalizedStringKey("Language")) {
@@ -93,6 +128,25 @@ struct SettingsView: View {
         let cleaned = calibrationDraft.replacingOccurrences(of: ",", with: ".")
         if let v = Double(cleaned) {
             store.setCalibration(offsetMeters: v)
+        }
+    }
+
+    /// Toggle handler: when the user flips the switch on, request HealthKit
+    /// authorization. Persist the toggle only if the request succeeds, so a
+    /// denied permission doesn't leave the UI in an inconsistent state.
+    private func handleHealthToggle(_ newValue: Bool) {
+        if newValue {
+            guard HealthService.isAvailable else { return }
+            healthRequestInFlight = true
+            Task {
+                let granted = await HealthService.shared.requestAuthorization()
+                await MainActor.run {
+                    healthRequestInFlight = false
+                    syncAltitudeToHealth = granted
+                }
+            }
+        } else {
+            syncAltitudeToHealth = false
         }
     }
 
