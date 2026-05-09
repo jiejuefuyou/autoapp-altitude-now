@@ -94,7 +94,7 @@ struct ContentView: View {
             .padding(.vertical, 10)
             .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 12))
         }
-        .accessibilityLabel(Text("Quick switch"))
+        .accessibilityLabel(Text(LocalizedStringKey("Quick switch")))
     }
 
     private var readouts: some View {
@@ -164,7 +164,7 @@ struct ContentView: View {
                         .padding(8)
                     }
                     .buttonStyle(.bordered)
-                    .accessibilityLabel(Text("japan_mountains_choose_button"))
+                    .accessibilityLabel(Text(LocalizedStringKey("japan_mountains_choose_button")))
                 }
             }
             HStack(spacing: 12) {
