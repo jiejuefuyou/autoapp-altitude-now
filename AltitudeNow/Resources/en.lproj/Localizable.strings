@@ -108,3 +108,14 @@
 "Sync altitude to Apple Health is a Premium feature" = "Sync altitude to Apple Health is a Premium feature";
 "When enabled, finished sessions are saved as workouts in Apple Health with your elevation gain." = "When enabled, finished sessions are saved as workouts in Apple Health with your elevation gain.";
 "Apple Health is not available on this device." = "Apple Health is not available on this device.";
+
+/* v1.0.3 — purchase result surface (Apple round-4 2.1(b) preempt port from AutoChoice) */
+"OK" = "OK";
+"Try again" = "Try again";
+"Purchase failed" = "Purchase failed";
+"Purchase canceled." = "Purchase canceled.";
+"Purchase pending" = "Purchase pending";
+"Purchase pending. We'll complete it shortly." = "Purchase pending. We'll complete it shortly.";
+"Product unavailable. Please try again later." = "Product unavailable. Please try again later.";
+"Purchase verification failed. Please contact support." = "Purchase verification failed. Please contact support.";
+"Unknown purchase result. Please try again." = "Unknown purchase result. Please try again.";

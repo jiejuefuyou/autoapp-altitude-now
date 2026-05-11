@@ -108,3 +108,14 @@
 "Sync altitude to Apple Health is a Premium feature" = "Sincronizar con Apple Salud es una función Premium";
 "When enabled, finished sessions are saved as workouts in Apple Health with your elevation gain." = "Cuando está activado, las sesiones finalizadas se guardan como entrenamientos en Apple Salud con tu ganancia de altitud.";
 "Apple Health is not available on this device." = "Apple Salud no está disponible en este dispositivo.";
+
+/* v1.0.3 — purchase result surface (Apple round-4 2.1(b) preempt port from AutoChoice) */
+"OK" = "OK";
+"Try again" = "Reintentar";
+"Purchase failed" = "Compra fallida";
+"Purchase canceled." = "Compra cancelada.";
+"Purchase pending" = "Compra pendiente";
+"Purchase pending. We'll complete it shortly." = "Compra pendiente. La completaremos en breve.";
+"Product unavailable. Please try again later." = "Producto no disponible. Inténtalo de nuevo más tarde.";
+"Purchase verification failed. Please contact support." = "La verificación de la compra falló. Contacta con soporte.";
+"Unknown purchase result. Please try again." = "Resultado de compra desconocido. Inténtalo de nuevo.";

@@ -108,3 +108,14 @@
 "Sync altitude to Apple Health is a Premium feature" = "同步到 Apple 健康为会员功能";
 "When enabled, finished sessions are saved as workouts in Apple Health with your elevation gain." = "开启后,完成的会话会作为带累积海拔的训练记录保存到 Apple 健康。";
 "Apple Health is not available on this device." = "此设备不支持 Apple 健康。";
+
+/* v1.0.3 — purchase result surface (Apple round-4 2.1(b) preempt port from AutoChoice) */
+"OK" = "好的";
+"Try again" = "重试";
+"Purchase failed" = "购买失败";
+"Purchase canceled." = "已取消购买。";
+"Purchase pending" = "购买待处理";
+"Purchase pending. We'll complete it shortly." = "购买待处理,稍后会自动完成。";
+"Product unavailable. Please try again later." = "商品暂时不可用,请稍后再试。";
+"Purchase verification failed. Please contact support." = "购买验证失败,请联系技术支持。";
+"Unknown purchase result. Please try again." = "购买结果未知,请重试。";
