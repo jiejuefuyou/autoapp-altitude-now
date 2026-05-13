@@ -45,9 +45,9 @@ struct SessionDetailView: View {
             Label(LocalizedStringKey("Summary"), systemImage: "chart.bar")
                 .font(.caption).foregroundStyle(.secondary)
             HStack(spacing: 14) {
-                statTile(LocalizedStringKey("max"), store.altitudeUnit.formatted(session.maxAltitude))
-                statTile(LocalizedStringKey("min"), store.altitudeUnit.formatted(session.minAltitude))
-                statTile(LocalizedStringKey("gain"), store.altitudeUnit.formatted(session.altitudeGain))
+                statTile(LocalizedStringKey("max"),  store.altitudeUnit.formatted(session.maxAltitude),  a11yLabel: LocalizedStringKey("Maximum altitude"))
+                statTile(LocalizedStringKey("min"),  store.altitudeUnit.formatted(session.minAltitude),  a11yLabel: LocalizedStringKey("Minimum altitude"))
+                statTile(LocalizedStringKey("gain"), store.altitudeUnit.formatted(session.altitudeGain), a11yLabel: LocalizedStringKey("Altitude gain"))
             }
         }
         .padding()
@@ -55,12 +55,15 @@ struct SessionDetailView: View {
         .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 14))
     }
 
-    private func statTile(_ key: LocalizedStringKey, _ value: String) -> some View {
+    private func statTile(_ key: LocalizedStringKey, _ value: String, a11yLabel: LocalizedStringKey) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(key).font(.caption2).foregroundStyle(.secondary)
             Text(value).font(.callout.monospacedDigit().weight(.semibold))
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(a11yLabel)
+        .accessibilityValue(Text(value))
     }
 
     private var chartCard: some View {
@@ -86,6 +89,8 @@ struct SessionDetailView: View {
                 }
                 .chartYAxisLabel("m")
                 .frame(height: 260)
+                .accessibilityLabel(Text(LocalizedStringKey("Session altitude chart")))
+                .accessibilityHint(Text(LocalizedStringKey("Line chart showing altitude in meters over the session duration")))
             }
         }
         .padding()

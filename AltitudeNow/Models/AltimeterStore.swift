@@ -1,6 +1,7 @@
 import Foundation
 import CoreMotion
 import Observation
+import UIKit
 
 @Observable
 final class AltimeterStore {
@@ -19,6 +20,11 @@ final class AltimeterStore {
     var current: AltitudeReading?
     var liveSession: Session?
     var isRunning: Bool = false
+
+    /// Tracks the session's peak altitude so we can fire haptic feedback when
+    /// the user surpasses their previous high-point by at least 1 m.
+    private var sessionPeak: Double = -Double.infinity
+    // TODO(v1.1): play peak ding.aiff when surpassing sessionPeak
 
     // Persisted state
     var sessions: [Session] = []
@@ -73,17 +79,24 @@ final class AltimeterStore {
     func start(name: String? = nil) {
         guard Self.isSensorAvailable, !isRunning else { return }
         isRunning = true
+        sessionPeak = -Double.infinity
         liveSession = Session(name: name, startedAt: .now, readings: [])
         altimeter.startRelativeAltitudeUpdates(to: .main) { [weak self] data, error in
             guard let self, let data else { return }
+            let newAltitude = data.relativeAltitude.doubleValue + self.calibrationOffset
             let reading = AltitudeReading(
                 timestamp: .now,
-                relativeAltitude: data.relativeAltitude.doubleValue + self.calibrationOffset,
+                relativeAltitude: newAltitude,
                 pressure: data.pressure.doubleValue
             )
             self.current = reading
             self.liveSession?.readings.append(reading)
             self.liveSession?.update(with: reading)
+            // Peak haptic: fire when user surpasses previous session high by +1 m.
+            if newAltitude > self.sessionPeak + 1.0 {
+                UINotificationFeedbackGenerator().notificationOccurred(.success)
+                self.sessionPeak = newAltitude
+            }
         }
     }
 
@@ -100,6 +113,7 @@ final class AltimeterStore {
         guard isRunning else { return nil }
         altimeter.stopRelativeAltitudeUpdates()
         isRunning = false
+        sessionPeak = -Double.infinity
         var savedSession: Session?
         if var s = liveSession, !s.readings.isEmpty {
             s.endedAt = .now

@@ -20,9 +20,13 @@ struct SettingsView: View {
                     Picker(LocalizedStringKey("Altitude"), selection: $store.altitudeUnit) {
                         ForEach(AltitudeUnit.allCases) { u in Text(u.rawValue).tag(u) }
                     }
+                    .accessibilityLabel(Text(LocalizedStringKey("Altitude unit")))
+                    .accessibilityHint(Text(LocalizedStringKey("Choose between meters and feet")))
                     Picker(LocalizedStringKey("Pressure"), selection: $store.pressureUnit) {
                         ForEach(PressureUnit.allCases) { u in Text(u.rawValue).tag(u) }
                     }
+                    .accessibilityLabel(Text(LocalizedStringKey("Pressure unit")))
+                    .accessibilityHint(Text(LocalizedStringKey("Choose between hPa and inHg")))
                 }
 
                 Section {
@@ -35,14 +39,20 @@ struct SettingsView: View {
                                 .multilineTextAlignment(.trailing)
                                 .frame(width: 100)
                                 .onSubmit(applyCalibration)
+                                .accessibilityLabel(Text(LocalizedStringKey("Calibration offset in meters")))
+                                .accessibilityHint(Text(LocalizedStringKey("Enter a positive or negative offset to align altitude with a known reference point")))
                         }
                         Button(LocalizedStringKey("Apply"), action: applyCalibration)
+                            .accessibilityLabel(Text(LocalizedStringKey("Apply calibration")))
+                            .accessibilityHint(Text(LocalizedStringKey("Applies the entered offset to all altitude readings")))
                     } else {
                         Button {
                             showPaywall = true
                         } label: {
                             Label(LocalizedStringKey("Calibration is a Premium feature"), systemImage: "lock.fill")
                         }
+                        .accessibilityLabel(Text(LocalizedStringKey("Calibration — Premium feature")))
+                        .accessibilityHint(Text(LocalizedStringKey("Unlock Premium to add a calibration offset")))
                     }
                 } header: {
                     Text(LocalizedStringKey("Calibration"))
@@ -62,6 +72,8 @@ struct SettingsView: View {
                             )
                         }
                         .disabled(healthRequestInFlight || !HealthService.isAvailable)
+                        .accessibilityLabel(Text(LocalizedStringKey("Sync altitude to Apple Health")))
+                        .accessibilityHint(Text(LocalizedStringKey("When enabled, finished sessions are saved as workouts in Apple Health")))
                         if !HealthService.isAvailable {
                             Text(LocalizedStringKey("Apple Health is not available on this device."))
                                 .font(.caption).foregroundStyle(.secondary)
@@ -75,6 +87,8 @@ struct SettingsView: View {
                                 systemImage: "lock.fill"
                             )
                         }
+                        .accessibilityLabel(Text(LocalizedStringKey("Apple Health sync — Premium feature")))
+                        .accessibilityHint(Text(LocalizedStringKey("Unlock Premium to enable Apple Health integration")))
                     }
                 } header: {
                     Text(LocalizedStringKey("Apple Health"))
@@ -88,17 +102,25 @@ struct SettingsView: View {
 
                 Section(LocalizedStringKey("Premium")) {
                     if iap.isPremium {
-                        Label(LocalizedStringKey("Premium unlocked"), systemImage: "checkmark.seal.fill").foregroundStyle(.green)
+                        Label(LocalizedStringKey("Premium unlocked"), systemImage: "checkmark.seal.fill")
+                            .foregroundStyle(.green)
+                            .accessibilityLabel(Text(LocalizedStringKey("Premium is active")))
                     } else {
                         Button { showPaywall = true } label: {
                             Label(LocalizedStringKey("Unlock Premium"), systemImage: "sparkles")
                         }
+                        .accessibilityLabel(Text(LocalizedStringKey("Unlock Premium")))
+                        .accessibilityHint(Text(LocalizedStringKey("Opens the purchase screen for calibration and Apple Health sync")))
                     }
                     Button(LocalizedStringKey("Restore Purchase")) { Task { await iap.restore() } }
+                        .accessibilityLabel(Text(LocalizedStringKey("Restore purchase")))
+                        .accessibilityHint(Text(LocalizedStringKey("Restores a previous Premium purchase on this Apple ID")))
                 }
 
                 Section(LocalizedStringKey("Sensor")) {
                     LabeledContent(LocalizedStringKey("Available"), value: AltimeterStore.isSensorAvailable ? String(localized: "Yes") : String(localized: "No"))
+                        .accessibilityLabel(Text(LocalizedStringKey("Barometric sensor availability")))
+                        .accessibilityValue(AltimeterStore.isSensorAvailable ? Text(LocalizedStringKey("Available")) : Text(LocalizedStringKey("Not available")))
                 }
 
                 Section(LocalizedStringKey("About")) {

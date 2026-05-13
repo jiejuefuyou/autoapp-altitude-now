@@ -39,9 +39,13 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button { showSessions = true } label: { Image(systemName: "list.bullet.clipboard") }
+                        .accessibilityLabel(Text(LocalizedStringKey("Sessions")))
+                        .accessibilityHint(Text(LocalizedStringKey("View all recorded altitude sessions")))
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button { showSettings = true } label: { Image(systemName: "gear") }
+                        .accessibilityLabel(Text(LocalizedStringKey("Settings")))
+                        .accessibilityHint(Text(LocalizedStringKey("Open app settings for units, language, and premium features")))
                 }
             }
             .sheet(isPresented: $showSessions) { SessionListView() }
@@ -111,11 +115,16 @@ struct ContentView: View {
     private func readoutCard(titleKey: LocalizedStringKey, value: String, icon: String) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             Label(titleKey, systemImage: icon).font(.caption).foregroundStyle(.secondary)
-            Text(value).font(.system(.title2, design: .rounded, weight: .semibold)).contentTransition(.numericText())
+            Text(value)
+                .font(.system(.title2, design: .rounded, weight: .semibold))
+                .contentTransition(.numericText())
+                .accessibilityValue(value)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
         .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 14))
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(titleKey)
     }
 
     private var chartCard: some View {
@@ -125,7 +134,9 @@ struct ContentView: View {
                 Label(LocalizedStringKey("Live altitude"), systemImage: "waveform.path.ecg").font(.caption).foregroundStyle(.secondary)
                 Spacer()
                 if let s = store.liveSession {
-                    Text(s.startedAt, style: .timer).font(.caption.monospacedDigit())
+                    Text(s.startedAt, style: .timer)
+                        .font(.caption.monospacedDigit())
+                        .accessibilityLabel(Text(LocalizedStringKey("Session duration")))
                 }
             }
             if readings.isEmpty {
@@ -140,6 +151,8 @@ struct ContentView: View {
                 }
                 .chartYAxisLabel("m")
                 .frame(height: 180)
+                .accessibilityLabel(Text(LocalizedStringKey("Live altitude chart")))
+                .accessibilityHint(Text(LocalizedStringKey("Shows altitude changes over time for the current session")))
             }
         }
         .padding()
@@ -178,6 +191,9 @@ struct ContentView: View {
                     Label(LocalizedStringKey("Start"), systemImage: "play.fill").frame(maxWidth: .infinity).padding()
                 }
                 .buttonStyle(.borderedProminent)
+                .buttonStyle(ScaleButtonStyle())
+                .accessibilityLabel(Text(LocalizedStringKey("Start recording")))
+                .accessibilityHint(Text(LocalizedStringKey("Begins a new altitude tracking session")))
             } else {
                 Button {
                     Haptics.medium()
@@ -192,6 +208,9 @@ struct ContentView: View {
                     Label(LocalizedStringKey("Stop"), systemImage: "stop.fill").frame(maxWidth: .infinity).padding()
                 }
                 .buttonStyle(.borderedProminent).tint(.red)
+                .buttonStyle(ScaleButtonStyle())
+                .accessibilityLabel(Text(LocalizedStringKey("Stop recording")))
+                .accessibilityHint(Text(LocalizedStringKey("Ends the current session and saves it")))
 
                 Button {
                     Haptics.light()
@@ -201,6 +220,9 @@ struct ContentView: View {
                         .frame(maxWidth: .infinity).padding()
                 }
                 .buttonStyle(.bordered)
+                .buttonStyle(ScaleButtonStyle())
+                .accessibilityLabel(Text(LocalizedStringKey("Reset session")))
+                .accessibilityHint(Text(LocalizedStringKey("Stops and immediately restarts the current recording")))
             }
             } // end HStack(spacing: 12)
         } // end VStack
