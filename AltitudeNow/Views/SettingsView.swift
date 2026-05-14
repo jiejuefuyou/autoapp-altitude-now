@@ -45,6 +45,32 @@ struct SettingsView: View {
                         Button(LocalizedStringKey("Apply"), action: applyCalibration)
                             .accessibilityLabel(Text(LocalizedStringKey("Apply calibration")))
                             .accessibilityHint(Text(LocalizedStringKey("Applies the entered offset to all altitude readings")))
+                    if let mtnAlt = UserDefaults.standard.object(forKey: "altitudenow.lastMountain.elevation") as? Double,
+                       let mtnName = UserDefaults.standard.string(forKey: "altitudenow.lastMountain.name"),
+                       !mtnName.isEmpty {
+                        Button {
+                            // Set offset so (current relative + offset) == mtnAlt
+                            let newOffset = mtnAlt - (store.current?.relativeAltitude ?? 0)
+                            store.setCalibration(offsetMeters: newOffset)
+                            calibrationDraft = String(format: "%.1f", newOffset)
+                            Haptics.success()
+                        } label: {
+                            HStack {
+                                Image(systemName: "mountain.2.fill")
+                                    .foregroundStyle(.tint)
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(String(format: NSLocalizedString("calibration_autofill_set_from", comment: ""), mtnName))
+                                        .font(.subheadline)
+                                    Text(String(format: "%.0f m", mtnAlt))
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                }
+                                Spacer()
+                            }
+                        }
+                        .accessibilityLabel(Text(String(format: NSLocalizedString("calibration_autofill_set_from", comment: ""), mtnName)))
+                        .accessibilityHint(Text(LocalizedStringKey("calibration_autofill_hint")))
+                    }
                     } else {
                         Button {
                             showPaywall = true

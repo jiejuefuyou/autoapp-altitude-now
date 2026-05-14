@@ -122,3 +122,17 @@
 
 "Skip" = "Passer";
 "Skip onboarding" = "Passer l'introduction";
+
+/* v1.0.4 — Session-end paywall nudge */
+"session_end_paywall_title" = "Belle ascension ! 🎉";
+"session_end_paywall_stats" = "Sommet %.0f m · Dénivelé %.0f m · %@";
+"session_end_paywall_duration_hm" = "%dh %dmin";
+"session_end_paywall_duration_m" = "%dmin";
+"session_end_paywall_headline" = "Conservez cette randonnée à vie";
+"session_end_paywall_body" = "La version gratuite ne conserve que votre dernière session. Passez à Premium pour sauvegarder un historique illimité, visualiser les graphiques et exporter en CSV.";
+"session_end_paywall_upgrade_cta" = "Passer à Premium";
+"session_end_paywall_dismiss" = "Peut-être plus tard";
+
+/* v1.0.4 — Calibration auto-fill from 100名山 */
+"calibration_autofill_set_from" = "Régler sur %@";
+"calibration_autofill_hint" = "Calibre l'altitude sur l'élévation de référence du mont sélectionné";

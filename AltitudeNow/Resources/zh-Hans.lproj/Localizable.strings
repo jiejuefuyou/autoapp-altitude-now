@@ -122,3 +122,17 @@
 
 "Skip" = "跳过";
 "Skip onboarding" = "跳过引导";
+
+/* v1.0.4 — Session-end paywall nudge */
+"session_end_paywall_title" = "登顶辛苦了！🎉";
+"session_end_paywall_stats" = "最高 %.0f m · 累积 %.0f m · %@";
+"session_end_paywall_duration_hm" = "%d小时%d分钟";
+"session_end_paywall_duration_m" = "%d分钟";
+"session_end_paywall_headline" = "永久保存这次登山";
+"session_end_paywall_body" = "免费版仅保留最近一次会话。升级会员可无限保存历史记录、查看图表并导出 CSV。";
+"session_end_paywall_upgrade_cta" = "升级会员";
+"session_end_paywall_dismiss" = "以后再说";
+
+/* v1.0.4 — Calibration auto-fill from 100名山 */
+"calibration_autofill_set_from" = "以 %@ 海拔为基准";
+"calibration_autofill_hint" = "将海拔校准为所选山峰的参考高度";

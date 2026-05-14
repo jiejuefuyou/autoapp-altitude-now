@@ -122,3 +122,17 @@
 
 "Skip" = "건너뛰기";
 "Skip onboarding" = "온보딩 건너뛰기";
+
+/* v1.0.4 — Session-end paywall nudge */
+"session_end_paywall_title" = "등반 수고하셨습니다! 🎉";
+"session_end_paywall_stats" = "최고 %.0f m · 획득 %.0f m · %@";
+"session_end_paywall_duration_hm" = "%d시간 %d분";
+"session_end_paywall_duration_m" = "%d분";
+"session_end_paywall_headline" = "이 등반을 영원히 저장";
+"session_end_paywall_body" = "무료 버전은 가장 최근 세션만 보관합니다. 프리미엄으로 업그레이드하면 무제한 기록 저장, 차트 보기, CSV 내보내기가 가능합니다.";
+"session_end_paywall_upgrade_cta" = "프리미엄 업그레이드";
+"session_end_paywall_dismiss" = "나중에";
+
+/* v1.0.4 — Calibration auto-fill from 100名山 */
+"calibration_autofill_set_from" = "%@ 기준으로 설정";
+"calibration_autofill_hint" = "선택한 산의 기준 고도로 고도를 보정합니다";

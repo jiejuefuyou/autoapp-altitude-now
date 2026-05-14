@@ -80,11 +80,18 @@ struct SessionDetailView: View {
             } else {
                 Chart {
                     ForEach(session.readings) { r in
+                        AreaMark(
+                            x: .value("t", r.timestamp),
+                            y: .value("alt", r.relativeAltitude)
+                        )
+                        .interpolationMethod(.monotone)
+                        .foregroundStyle(Color.accentColor.opacity(0.15).gradient)
                         LineMark(
                             x: .value("t", r.timestamp),
                             y: .value("alt", r.relativeAltitude)
                         )
                         .interpolationMethod(.monotone)
+                        .foregroundStyle(Color.accentColor)
                     }
                 }
                 .chartYAxisLabel("m")

@@ -122,3 +122,17 @@
 
 "Skip" = "Überspringen";
 "Skip onboarding" = "Einführung überspringen";
+
+/* v1.0.4 — Session-end paywall nudge */
+"session_end_paywall_title" = "Toller Aufstieg! 🎉";
+"session_end_paywall_stats" = "Gipfel %.0f m · Aufstieg %.0f m · %@";
+"session_end_paywall_duration_hm" = "%dh %dmin";
+"session_end_paywall_duration_m" = "%dmin";
+"session_end_paywall_headline" = "Bewahre diese Wanderung für immer";
+"session_end_paywall_body" = "Die kostenlose Version speichert nur deine aktuellste Session. Mit Premium speicherst du unbegrenzt Sitzungen, siehst alle Charts und exportierst CSV-Dateien.";
+"session_end_paywall_upgrade_cta" = "Auf Premium upgraden";
+"session_end_paywall_dismiss" = "Vielleicht später";
+
+/* v1.0.4 — Calibration auto-fill from 100名山 */
+"calibration_autofill_set_from" = "Von %@ übernehmen";
+"calibration_autofill_hint" = "Kalibriert die Höhe auf die Referenzhöhe des gewählten Berges";

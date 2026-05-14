@@ -13,6 +13,8 @@ struct ContentView: View {
     @State private var showPaywall = false
     @State private var showMountainList = false
     @State private var pendingSessionName: String = ""
+    @State private var showSessionEndPaywall = false
+    @State private var lastSavedSession: Session?
 
     private var quickSwitchMountains: [Mountain] {
         let ids = FavoriteMountains.decode(favoritedRaw).prefix(FavoriteMountains.maxQuickSwitch)
@@ -51,6 +53,13 @@ struct ContentView: View {
             .sheet(isPresented: $showSessions) { SessionListView() }
             .sheet(isPresented: $showSettings) { SettingsView() }
             .sheet(isPresented: $showPaywall) { PaywallView() }
+            .sheet(isPresented: $showSessionEndPaywall) {
+                SessionEndPaywallSheet(
+                    session: lastSavedSession,
+                    onUpgrade: { showSessionEndPaywall = false; showPaywall = true },
+                    onDismiss: { showSessionEndPaywall = false }
+                )
+            }
             .sheet(isPresented: $showMountainList) {
                 MountainListView { name, _ in
                     pendingSessionName = name
@@ -145,8 +154,12 @@ struct ContentView: View {
             } else {
                 Chart {
                     ForEach(readings) { r in
+                        AreaMark(x: .value("t", r.timestamp), y: .value("alt", r.relativeAltitude))
+                            .interpolationMethod(.monotone)
+                            .foregroundStyle(Color.accentColor.opacity(0.15).gradient)
                         LineMark(x: .value("t", r.timestamp), y: .value("alt", r.relativeAltitude))
                             .interpolationMethod(.monotone)
+                            .foregroundStyle(Color.accentColor)
                     }
                 }
                 .chartYAxisLabel("m")
@@ -196,14 +209,7 @@ struct ContentView: View {
                 .accessibilityHint(Text(LocalizedStringKey("Begins a new altitude tracking session")))
             } else {
                 Button {
-                    Haptics.medium()
-                    let savedSession = store.stopAndReturnSavedSession()
-                    Haptics.success()
-                    if iap.isPremium,
-                       UserDefaults.standard.bool(forKey: "syncAltitudeToAppleHealth"),
-                       let s = savedSession {
-                        Task { await HealthService.shared.saveSessionAsWorkout(s) }
-                    }
+                    handleStop()
                 } label: {
                     Label(LocalizedStringKey("Stop"), systemImage: "stop.fill").frame(maxWidth: .infinity).padding()
                 }
@@ -226,6 +232,22 @@ struct ContentView: View {
             }
             } // end HStack(spacing: 12)
         } // end VStack
+    }
+
+    private func handleStop() {
+        Haptics.medium()
+        let savedSession = store.stopAndReturnSavedSession()
+        Haptics.success()
+        if iap.isPremium,
+           UserDefaults.standard.bool(forKey: "syncAltitudeToAppleHealth"),
+           let s = savedSession {
+            Task { await HealthService.shared.saveSessionAsWorkout(s) }
+        }
+        // Non-premium upsell: show after meaningful session (peakAltitude > 50 m)
+        if !iap.isPremium, let s = savedSession, s.maxAltitude > 50 {
+            lastSavedSession = s
+            showSessionEndPaywall = true
+        }
     }
 
     private var unsupportedDevice: some View {

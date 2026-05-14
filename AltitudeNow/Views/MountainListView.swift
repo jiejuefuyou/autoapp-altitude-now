@@ -245,6 +245,9 @@ struct MountainListView: View {
     }
 
     private func handleSelect(_ m: Mountain) {
+        // Persist for Calibration auto-fill in SettingsView
+        UserDefaults.standard.set(Double(m.elevation_m), forKey: "altitudenow.lastMountain.elevation")
+        UserDefaults.standard.set(m.name_ja, forKey: "altitudenow.lastMountain.name")
         onSelect(m.name_ja, m.elevation_m)
         dismiss()
     }

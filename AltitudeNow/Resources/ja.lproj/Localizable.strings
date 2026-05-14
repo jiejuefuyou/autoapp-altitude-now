@@ -122,3 +122,17 @@
 
 "Skip" = "スキップ";
 "Skip onboarding" = "オンボーディングをスキップ";
+
+/* v1.0.4 — Session-end paywall nudge */
+"session_end_paywall_title" = "お疲れさまでした！🎉";
+"session_end_paywall_stats" = "最高点 %.0f m · 獲得標高 %.0f m · %@";
+"session_end_paywall_duration_hm" = "%d時間%d分";
+"session_end_paywall_duration_m" = "%d分";
+"session_end_paywall_headline" = "この登山を永久に保存";
+"session_end_paywall_body" = "無料版では最新のセッションのみ保持されます。プレミアムにアップグレードすると、無制限の履歴保存・グラフ表示・CSV書き出しが使えます。";
+"session_end_paywall_upgrade_cta" = "プレミアムにアップグレード";
+"session_end_paywall_dismiss" = "後で";
+
+/* v1.0.4 — Calibration auto-fill from 100名山 */
+"calibration_autofill_set_from" = "%@ の標高に合わせる";
+"calibration_autofill_hint" = "選択した山の参照標高に合わせて校正します";
