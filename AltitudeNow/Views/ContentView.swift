@@ -4,6 +4,7 @@ import Charts
 struct ContentView: View {
     @Environment(AltimeterStore.self) private var store
     @Environment(IAPManager.self) private var iap
+    @Environment(LocalizationManager.self) private var l10n
 
     @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding: Bool = false
     @AppStorage(FavoriteMountains.storageKey) private var favoritedRaw: String = ""
@@ -50,26 +51,54 @@ struct ContentView: View {
                         .accessibilityHint(Text(LocalizedStringKey("Open app settings for units, language, and premium features")))
                 }
             }
-            .sheet(isPresented: $showSessions) { SessionListView() }
-            .sheet(isPresented: $showSettings) { SettingsView() }
-            .sheet(isPresented: $showPaywall) { PaywallView() }
+            // CRITICAL: SwiftUI sheet/fullScreenCover attaches modal to scene
+            // presentation host, NOT to view tree. Force per-modal rebuild on
+            // language change. Code-only commit (not tagged) — current v1.0.3
+            // is IN_REVIEW Expedited, fix ships as v1.0.4 after verdict.
+            .sheet(isPresented: $showSessions) {
+                SessionListView()
+                    .environment(l10n)
+                    .environment(\.locale, l10n.currentLocale)
+                    .id(l10n.override)
+            }
+            .sheet(isPresented: $showSettings) {
+                SettingsView()
+                    .environment(l10n)
+                    .environment(\.locale, l10n.currentLocale)
+                    .id(l10n.override)
+            }
+            .sheet(isPresented: $showPaywall) {
+                PaywallView()
+                    .environment(l10n)
+                    .environment(\.locale, l10n.currentLocale)
+                    .id(l10n.override)
+            }
             .sheet(isPresented: $showSessionEndPaywall) {
                 SessionEndPaywallSheet(
                     session: lastSavedSession,
                     onUpgrade: { showSessionEndPaywall = false; showPaywall = true },
                     onDismiss: { showSessionEndPaywall = false }
                 )
+                .environment(l10n)
+                .environment(\.locale, l10n.currentLocale)
+                .id(l10n.override)
             }
             .sheet(isPresented: $showMountainList) {
                 MountainListView { name, _ in
                     pendingSessionName = name
                 }
+                .environment(l10n)
+                .environment(\.locale, l10n.currentLocale)
+                .id(l10n.override)
             }
             .fullScreenCover(isPresented: Binding(
                 get: { !hasSeenOnboarding },
                 set: { _ in /* OnboardingView writes hasSeenOnboarding directly */ }
             )) {
                 OnboardingView(hasSeenOnboarding: $hasSeenOnboarding)
+                    .environment(l10n)
+                    .environment(\.locale, l10n.currentLocale)
+                    .id(l10n.override)
             }
         }
     }
